@@ -19,7 +19,7 @@ import { Collapse, Grid } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import { useState } from "react";
 
-function SubMenu() {
+function SubMenu({ mainTitle, subMenus }) {
   const [subMenu, setSubmenu] = useState(false);
 
   const handleClick = () => {
