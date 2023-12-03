@@ -9,6 +9,7 @@ import {
 import { Fragment, useEffect, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
+import { forwardRef } from "react";
 
 // let rightHeader = {
 //   icon: {
@@ -37,12 +38,14 @@ import Link from "next/link";
 function RightTopHeader({ content }) {
   const RightTopHeaderEl = styled("div")(() => ({
     ...content?.style,
+    display: "flex",
   }));
   const TextEl = styled(Typography)(() => ({
     ...content?.text?.style,
   }));
   const IconsEl = styled("div")(() => ({
-    ...content?.text?.style,
+    ...content?.icon?.style,
+    display: "flex",
   }));
 
   return (
@@ -53,17 +56,29 @@ function RightTopHeader({ content }) {
             {content?.icon?.icons?.map((el) => {
               return (
                 <Fragment key={el?.id}>
-                  <Link href={el?.link}>{el?.icon}</Link>
+                  <Link
+                    href={el?.link}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    {el?.icon}
+                  </Link>
                 </Fragment>
               );
             })}
           </IconsEl>
         )}
-        {!content?.text?.disable && (
-          <TextEl className={`${content?.text?.customClass}`}>
-            {content?.text?.content}
-          </TextEl>
-        )}
+        {!content?.text?.disable &&
+          (content?.text?.link ? (
+            <Link href={content?.text?.link}>
+              <TextEl className={`${content?.text?.customClass}`}>
+                {content?.text?.content}
+              </TextEl>
+            </Link>
+          ) : (
+            <TextEl className={`${content?.text?.customClass}`}>
+              {content?.text?.content}
+            </TextEl>
+          ))}
       </RightTopHeaderEl>
     </Fragment>
   );
@@ -72,12 +87,14 @@ function RightTopHeader({ content }) {
 function LeftTopHeader({ content }) {
   const LeftTopHeaderEl = styled("div")(() => ({
     ...content?.style,
+    display: "flex",
   }));
   const TextEl = styled("div")(() => ({
     ...content?.text?.style,
   }));
   const IconsEl = styled("div")(() => ({
-    ...content?.text?.style,
+    ...content?.icon?.style,
+    display: "flex",
   }));
 
   return (
@@ -87,41 +104,41 @@ function LeftTopHeader({ content }) {
           {!content?.icon?.disable && (
             <IconsEl className={`${content?.icon?.customClass}`}>
               {content?.icon?.icons?.map((el) => {
-                const icon = el?.displayIcon(el?.customClass, el?.style);
                 return (
                   <Fragment key={el?.id}>
-                    <Link href={el?.link}>{icon}</Link>
+                    <Link
+                      href={el?.link}
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      {el?.icon}
+                    </Link>
                   </Fragment>
                 );
               })}
             </IconsEl>
           )}
-          {!content?.text?.disabled && (
-            <TextEl className={`${content?.text?.customClass}`}>
-              {content?.content}
-            </TextEl>
-          )}
+          {!content?.text?.disable &&
+            (content?.text?.link ? (
+              <Link href={content?.text?.link}>
+                <TextEl className={`${content?.text?.customClass}`}>
+                  {content?.text?.content}
+                </TextEl>
+              </Link>
+            ) : (
+              <TextEl className={`${content?.text?.customClass}`}>
+                {content?.text?.content}
+              </TextEl>
+            ))}
         </LeftTopHeaderEl>
       </Fragment>
     </>
   );
 }
 
-const TopHeader = ({
-  disabled,
-  headerStyle,
-  toolbarStyle,
-  leftSideContent,
-  rightSideContent,
-}) => {
-  const testRef = useRef(null);
-
-  useEffect(() => {
-    if (testRef.current) {
-      console.log(testRef.current);
-    }
-  }, [testRef.current]);
-
+const TopHeader = forwardRef(function TopHeader(
+  { disabled, headerStyle, toolbarStyle, leftSideContent, rightSideContent },
+  ref
+) {
   const AppBar = styled(MuiAppbar)(() => ({
     ...headerStyle,
   }));
@@ -133,7 +150,7 @@ const TopHeader = ({
   return (
     <Fragment>
       {!disabled && (
-        <Box ref={testRef}>
+        <Box ref={ref}>
           <AppBar>
             <Toolbar variant="dense">
               <Grid
@@ -155,6 +172,6 @@ const TopHeader = ({
       )}
     </Fragment>
   );
-};
+});
 
 export default TopHeader;
