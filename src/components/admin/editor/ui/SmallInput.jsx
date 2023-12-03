@@ -6,7 +6,6 @@ import {
   InputAdornment,
   InputLabel,
 } from "@mui/material";
-import { useState } from "react";
 
 const SmallInput = ({ style, labelName, adormentText, ...props }) => {
   const InputBase = styled(MuiBaseInput)(() => ({
@@ -14,10 +13,6 @@ const SmallInput = ({ style, labelName, adormentText, ...props }) => {
     borderRadius: "5px",
     height: "40px",
   }));
-
-  const [inp, setInp] = useState(false);
-
-  console.log(inp);
 
   return (
     <>

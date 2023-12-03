@@ -1,7 +1,5 @@
 function AdminHome() {
-  return <>
-    
-  </>;
+  return <></>;
 }
 
 export default AdminHome;

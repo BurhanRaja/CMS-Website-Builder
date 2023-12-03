@@ -19,7 +19,6 @@ import { forwardRef } from "react";
 //         customClass: "",
 //         link: "",
 //         style: "",
-//         displayIcon: () => {}
 //       },
 //     ],
 //     customClass: "",

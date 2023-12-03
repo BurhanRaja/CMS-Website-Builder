@@ -14,64 +14,46 @@ export const socialIcons = [
   {
     id: uuid(),
     iconName: "github",
-    icon: <GitHubIcon />,
+    icon: "GitHub",
   },
   {
     id: uuid(),
     iconName: "instagram",
-    icon: <InstagramIcon />,
+    icon: "Instagram",
   },
   {
     id: uuid(),
     iconName: "facebook",
-    icon: <FacebookIcon />,
+    icon: "Facebook",
   },
   {
     id: uuid(),
     iconName: "linkedin",
-    icon: <LinkedInIcon />,
+    icon: "LinkedIn",
   },
   {
     id: uuid(),
     iconName: "twitter",
-    icon: <TwitterIcon />,
+    icon: "Twitter",
   },
   {
     id: uuid(),
     iconName: "youtube",
-    icon: <YouTubeIcon />,
+    icon: "YouTube",
   },
   {
     id: uuid(),
     iconName: "reddit",
-    icon: <RedditIcon />,
+    icon: "Reddit",
   },
   {
     id: uuid(),
     iconName: "pinterest",
-    icon: <PinterestIcon />,
+    icon: "Pinterest",
   },
   {
     id: uuid(),
     iconName: "whatsapp",
-    icon: <WhatsAppIcon />,
-  },
-];
-
-import ShareIcon from "@mui/icons-material/Share";
-import ModeCommentIcon from "@mui/icons-material/ModeComment";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-export const allIcons = [
-  {
-    id: uuid(),
-    name: "share",
-    icon: <ShareIcon />,
-  },
-  {
-    id: uuid(),
-    name: "comment",
-    icon: <ModeCommentIcon />,
+    icon: "WhatsApp",
   },
 ];

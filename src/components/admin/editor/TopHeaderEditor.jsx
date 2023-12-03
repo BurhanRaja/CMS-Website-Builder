@@ -1,13 +1,18 @@
 "use client";
 import {
   Box,
+  Button,
   Divider,
   Grid,
   IconButton,
+  InputLabel,
+  SvgIcon,
+  TextField,
   Tooltip,
   Typography,
   styled,
 } from "@mui/material";
+import * as MuiIcon from "@mui/icons-material";
 import TopHeader from "../ui/header/TopHeader";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SmallInput from "./ui/SmallInput";
@@ -58,7 +63,7 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
                     })
                   }
                 >
-                  {el.icon}
+                  <SvgIcon component={MuiIcon[el.icon]}></SvgIcon>
                 </IconButton>
               </Tooltip>
             </Fragment>
@@ -67,38 +72,61 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
       </Box>
       {leftIconObj.icon && (
         <>
-          <Typography
-            variant="body1"
-            marginTop={"20px"}
-            marginBottom={"5px"}
-            color={"black"}
-          >
-            Chosen Icon
-          </Typography>
-          <IconButton
-            sx={{
-              fontSize: "50px",
-              padding: "5px",
-              borderRadius: "4px",
-              marginRight: "10px",
-              color: color.hex,
-            }}
-          >
-            {leftIconObj.icon}
-          </IconButton>
+          <Box textAlign={"center"} marginTop={"15px"}>
+            <IconButton
+              sx={{
+                fontSize: "50px",
+                padding: "5px",
+                borderRadius: "4px",
+                marginRight: "10px",
+                color: color.hex,
+              }}
+            >
+              <SvgIcon
+                component={MuiIcon[leftIconObj.icon]}
+                sx={{ fontSize: "100px" }}
+              ></SvgIcon>
+            </IconButton>
+          </Box>
           <Box marginTop={"5px"}>
             <Grid container>
               <Grid item>
-                <SmallInput
-                  type="text"
-                  style={{
-                    border: "1px solid gray",
-                    padding: "5px",
-                    width: "80%",
-                  }}
-                  inputRef={linkRef}
-                  labelName={"Link"}
-                />
+                <Box>
+                  <SmallInput
+                    type="text"
+                    style={{
+                      border: "1px solid gray",
+                      padding: "5px",
+                      width: "80%",
+                    }}
+                    inputRef={linkRef}
+                    labelName={"Link"}
+                  />
+                </Box>
+                <Box marginTop={"12px"}>
+                  <SmallInput
+                    type="text"
+                    style={{
+                      border: "1px solid gray",
+                      padding: "5px",
+                      width: "80%",
+                    }}
+                    inputRef={linkRef}
+                    labelName={"Custom Class"}
+                  />
+                </Box>
+                <Box marginTop={"12px"}>
+                  <InputLabel>Custom CSS</InputLabel>
+                  <TextField
+                    sx={{
+                      width: "90%",
+                    }}
+                    hiddenLabel
+                    id="outlined-multiline-static"
+                    multiline
+                    rows={6}
+                  />
+                </Box>
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="body1">Select Color</Typography>
@@ -109,6 +137,7 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
                 />
               </Grid>
             </Grid>
+            <Button variant="contained">Add</Button>
           </Box>
         </>
       )}
@@ -132,79 +161,84 @@ const TopHeaderEditor = () => {
     setDialogOpen(true);
   }
 
+  let disabled = false;
+  let headerStyle = {
+    backgroundColor: "#a6c626",
+    padding: "5px 10px",
+    position: "static",
+  };
+  let toolbarStyle = {
+    minHeight: "30px",
+  };
+  let rightSideContent = {
+    text: {
+      disable: false,
+      content: "Hello",
+      customClass: "toprightheader",
+      style: {
+        fontSize: "20px",
+        textAlign: "end",
+      },
+    },
+    icon: {
+      disable: false,
+      icons: [
+        {
+          id: "1",
+          link: "",
+          icon: <InstagramIcon className="" sx={{ color: "white" }} />,
+        },
+      ],
+      style: {
+        alignItems: "center",
+        justifyContent: "start",
+      },
+    },
+    style: {
+      justifyContent: "end",
+    },
+  };
+  let leftSideContent = {
+    text: {
+      disable: false,
+      content: "Hello",
+      customClass: "",
+      style: {
+        fontSize: "20px",
+        textAlign: "start",
+      },
+    },
+    icon: {
+      disable: false,
+      icons: [
+        {
+          id: "1",
+          link: "",
+          icon: <InstagramIcon className="" sx={{ color: "white" }} />,
+        },
+      ],
+      customClass: "",
+      style: {
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    },
+    style: {
+      justifyContent: leftJC,
+      alignItems: leftAI,
+    },
+  };
+
   return (
     <>
       <TopHeader
         ref={topHeaderRef}
-        disabled={false}
-        headerStyle={{
-          backgroundColor: "#a6c626",
-          padding: "5px 10px",
-          position: "static",
-        }}
-        toolbarStyle={{
-          minHeight: "30px",
-        }}
-        rightSideContent={{
-          text: {
-            disable: false,
-            content: "Hello",
-            customClass: "toprightheader",
-            style: {
-              fontSize: "20px",
-              textAlign: "end",
-            },
-          },
-          icon: {
-            disable: false,
-            icons: [
-              {
-                id: "1",
-                link: "",
-                icon: <InstagramIcon className="" sx={{ color: "white" }} />,
-              },
-            ],
-            style: {
-              alignItems: "center",
-              justifyContent: "start",
-            },
-          },
-          style: {
-            justifyContent: "end",
-          },
-        }}
-        leftSideContent={{
-          text: {
-            disable: false,
-            content: "Hello",
-            customClass: "",
-            style: {
-              fontSize: "20px",
-              textAlign: "start",
-            },
-          },
-          icon: {
-            disable: false,
-            icons: [
-              {
-                id: "1",
-                link: "",
-                icon: <InstagramIcon className="" sx={{ color: "white" }} />,
-              },
-            ],
-            customClass: "",
-            style: {
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          },
-          style: {
-            justifyContent: leftJC,
-            alignItems: leftAI,
-          },
-        }}
+        disabled={disabled}
+        headerStyle={headerStyle}
+        leftSideContent={leftSideContent}
+        rightSideContent={rightSideContent}
+        toolbarStyle={toolbarStyle}
       />
-
       <TopHeaderEditorEl>
         <Grid container>
           <Grid item xs={5}>
