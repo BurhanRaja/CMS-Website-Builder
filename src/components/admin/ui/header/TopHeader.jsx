@@ -144,6 +144,8 @@ const TopHeader = forwardRef(function TopHeader(
 
   const Toolbar = styled(MuiToolbar)(() => ({
     ...toolbarStyle,
+    paddingLeft: "0",
+    paddingRight: "0",
   }));
 
   return (

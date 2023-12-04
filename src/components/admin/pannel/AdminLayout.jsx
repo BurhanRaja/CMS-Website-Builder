@@ -26,7 +26,7 @@ const AdminLayout = ({ children }) => {
       />
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "white" }}
+        sx={{ flexGrow: 1, p: 3, backgroundColor: "#e9e9e9" }}
       >
         <DrawerHeader />
         {children}

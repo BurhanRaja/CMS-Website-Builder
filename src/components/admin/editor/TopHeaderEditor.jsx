@@ -24,11 +24,13 @@ import AlignItems from "./ui/AlignItems";
 import { socialIcons } from "@/utils/allIcons";
 import { useColor, ColorPicker } from "react-color-palette";
 import "react-color-palette/css";
+import Margin from "./ui/Margin";
+import Padding from "./ui/Padding";
 
 const TopHeaderEditorEl = styled("div")(() => ({
-  marginTop: "100px",
-  borderTop: "2px solid black",
-  padding: "10px",
+  marginTop: "50px",
+  padding: "20px",
+  backgroundColor: "white",
 }));
 
 const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
@@ -146,12 +148,13 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
 };
 
 const TopHeaderEditor = () => {
-  const inpRef = useRef(null);
   const topHeaderRef = useRef(null);
 
   const [leftJC, setLeftJC] = useState("start");
   const [leftAI, setLeftAI] = useState("start");
   const [leftIconObj, setLeftIconObj] = useState({});
+  const [mainMargin, setMainMargin] = useState([]);
+  const [mainPadding, setMainPadding] = useState([]);
 
   const [dialogOpen, setDialogOpen] = useState(false);
   function handleDialogClose() {
@@ -164,8 +167,15 @@ const TopHeaderEditor = () => {
   let disabled = false;
   let headerStyle = {
     backgroundColor: "#a6c626",
-    padding: "5px 10px",
     position: "static",
+    marginTop: mainMargin[0],
+    marginLeft: mainMargin[1],
+    marginBottom: mainMargin[2],
+    marginRight: mainMargin[3],
+    paddingTop: mainPadding[0],
+    paddingLeft: mainPadding[1],
+    paddingBottom: mainPadding[2],
+    paddingRight: mainPadding[3],
   };
   let toolbarStyle = {
     minHeight: "30px",
@@ -229,34 +239,60 @@ const TopHeaderEditor = () => {
     },
   };
 
+  console.log(mainMargin);
+
   return (
     <>
-      <TopHeader
-        ref={topHeaderRef}
-        disabled={disabled}
-        headerStyle={headerStyle}
-        leftSideContent={leftSideContent}
-        rightSideContent={rightSideContent}
-        toolbarStyle={toolbarStyle}
-      />
+      <Box backgroundColor="white" padding={"10px"}>
+        <TopHeader
+          ref={topHeaderRef}
+          disabled={disabled}
+          headerStyle={headerStyle}
+          leftSideContent={leftSideContent}
+          rightSideContent={rightSideContent}
+          toolbarStyle={toolbarStyle}
+        />
+      </Box>
       <TopHeaderEditorEl>
+        <Typography variant="h5" fontWeight="bolder" marginBottom={"10px"}>
+          Main Content
+        </Typography>
+        <Box marginBottom={"30px"}>
+          <Grid container columnGap={10}>
+            <Grid item>
+              <Margin setMargin={(val) => setMainMargin(val)} />
+            </Grid>
+            <Grid item>
+              <Padding setPadding={(val) => setMainPadding(val)} />
+            </Grid>
+          </Grid>
+        </Box>
         <Grid container>
-          <Grid item xs={5}>
+          <Grid item xs={6} borderRight={"1px solid black"}>
             <Typography
               variant="h5"
               fontWeight="bolder"
-              marginTop="30px"
+              marginTop="10px"
               marginBottom="20px"
             >
               Left Side Content
             </Typography>
             <Box>
               <Box marginBottom={"20px"}>
-                <JustifyContent
-                  name={leftJC}
-                  setName={(val) => setLeftJC(val)}
-                />
-                <AlignItems name={leftAI} setName={(val) => setLeftAI(val)} />
+                <Grid container>
+                  <Grid item xs={4}>
+                    <JustifyContent
+                      name={leftJC}
+                      setName={(val) => setLeftJC(val)}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <AlignItems
+                      name={leftAI}
+                      setName={(val) => setLeftAI(val)}
+                    />
+                  </Grid>
+                </Grid>
               </Box>
               <Typography variant="h6" fontWeight="bold" marginBottom="8px">
                 Icons
@@ -268,11 +304,10 @@ const TopHeaderEditor = () => {
                 alignItems={"center"}
                 sx={{
                   padding: "10px 10px",
-                  border: "1px solid #B6BBC4",
                   borderRadius: "7px",
-                  width: "60px",
-                  height: "60px",
-                  backgroundColor: "#ebebeb",
+                  width: "80px",
+                  height: "80px",
+                  backgroundColor: "#f5f5f5",
                 }}
               >
                 <IconButton onClick={() => handleDialogOpen()}>
@@ -293,22 +328,10 @@ const TopHeaderEditor = () => {
             </Box>
             <h3>Text</h3>
           </Grid>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-            sx={{ marginRight: "10px", borderColor: "black" }}
-          />
-          <Grid item xs={6}>
+          <Grid item xs={6} paddingLeft={"10px"}>
             <h2>Right Side Content</h2>
           </Grid>
         </Grid>
-        <SmallInput
-          style={{ border: "1px solid gray", padding: "5px", width: "65px" }}
-          type="text"
-          inputRef={inpRef}
-          adormentText={"px"}
-        />
       </TopHeaderEditorEl>
     </>
   );
