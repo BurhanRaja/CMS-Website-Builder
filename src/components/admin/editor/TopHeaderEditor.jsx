@@ -6,6 +6,7 @@ import {
   Grid,
   IconButton,
   InputLabel,
+  InputBase,
   SvgIcon,
   TextField,
   Tooltip,
@@ -33,15 +34,30 @@ const TopHeaderEditorEl = styled("div")(() => ({
   backgroundColor: "white",
 }));
 
-const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
-  const linkRef = useRef(null);
-
-  const handleAddIcon = () => {};
+const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
+  const [leftIconObj, setLeftIconObj] = useState({});
   const [color, setColor] = useColor("black");
+  const [link, setLink] = useState("");
+  const [customClass, setCustomClass] = useState("");
+  const [customCss, setCustomCss] = useState("");
+  const [customFont, setCustomFont] = useState("100");
+
+  const handleAddIcon = () => {
+    let data = {
+      customClass,
+      style: { ...customCss },
+      icon: leftIconObj.icon,
+      color,
+      fontSize: customFont,
+      link,
+    };
+    let allIcons = [...leftIconList, data];
+    setLeftIconList(allIcons);
+  };
 
   return (
     <>
-      <Typography variant="body1" marginBottom={"10px"} fontWeight={"bold"}>
+      <Typography variant='body1' marginBottom={"10px"} fontWeight={"bold"}>
         Social Icons
       </Typography>
       <Box display={"flex"} justifyContent={"space-between"} flexWrap={"wrap"}>
@@ -65,7 +81,7 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
                     })
                   }
                 >
-                  <SvgIcon component={MuiIcon[el.icon]}></SvgIcon>
+                  <SvgIcon component={MuiIcon[el?.icon]}></SvgIcon>
                 </IconButton>
               </Tooltip>
             </Fragment>
@@ -86,7 +102,7 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
             >
               <SvgIcon
                 component={MuiIcon[leftIconObj.icon]}
-                sx={{ fontSize: "100px" }}
+                sx={{ fontSize: `${customFont}px` }}
               ></SvgIcon>
             </IconButton>
           </Box>
@@ -94,44 +110,74 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
             <Grid container>
               <Grid item>
                 <Box>
-                  <SmallInput
-                    type="text"
+                  <InputLabel>Link</InputLabel>
+                  <InputBase
+                    type='text'
                     style={{
                       border: "1px solid gray",
                       padding: "5px",
                       width: "80%",
+                      borderRadius: "5px",
+                      height: "40px",
                     }}
-                    inputRef={linkRef}
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
                     labelName={"Link"}
                   />
                 </Box>
                 <Box marginTop={"12px"}>
-                  <SmallInput
-                    type="text"
+                  <InputLabel>Custom Class</InputLabel>
+                  <InputBase
+                    type='text'
                     style={{
                       border: "1px solid gray",
                       padding: "5px",
                       width: "80%",
+                      borderRadius: "5px",
+                      height: "40px",
                     }}
-                    inputRef={linkRef}
+                    value={customClass}
+                    onChange={(e) => setCustomClass(e.target.value)}
                     labelName={"Custom Class"}
                   />
                 </Box>
                 <Box marginTop={"12px"}>
+                  <InputLabel>Font Size</InputLabel>
+                  <InputBase
+                    type='text'
+                    style={{
+                      border: "1px solid gray",
+                      padding: "5px",
+                      width: "80%",
+                      borderRadius: "5px",
+                      height: "40px",
+                    }}
+                    value={customFont}
+                    onChange={(e) => setCustomFont(e.target.value)}
+                    labelName={"Custom Font Size"}
+                    endAdornment={"px"}
+                  />
+                </Box>
+                <Box marginTop={"12px"}>
                   <InputLabel>Custom CSS</InputLabel>
+                  <Typography variant='caption'>
+                    (Wrtie CSS directly)
+                  </Typography>
                   <TextField
                     sx={{
                       width: "90%",
                     }}
                     hiddenLabel
-                    id="outlined-multiline-static"
+                    id='outlined-multiline-static'
                     multiline
-                    rows={6}
+                    rows={5}
+                    value={customCss}
+                    onChange={(e) => setCustomCss(e.target.value)}
                   />
                 </Box>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="body1">Select Color</Typography>
+                <Typography variant='body1'>Select Color</Typography>
                 <ColorPicker
                   hideInput={["rgb", "hsv"]}
                   color={color}
@@ -139,7 +185,15 @@ const LeftModalContent = ({ leftIconObj, setLeftIconObj }) => {
                 />
               </Grid>
             </Grid>
-            <Button variant="contained">Add</Button>
+            <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
+              <Button
+                variant='contained'
+                sx={{ marginTop: "20px", width: "40%" }}
+                onClick={handleAddIcon}
+              >
+                Add
+              </Button>
+            </Box>
           </Box>
         </>
       )}
@@ -152,7 +206,8 @@ const TopHeaderEditor = () => {
 
   const [leftJC, setLeftJC] = useState("start");
   const [leftAI, setLeftAI] = useState("start");
-  const [leftIconObj, setLeftIconObj] = useState({});
+  const [leftIconList, setLeftIconList] = useState([]);
+
   const [mainMargin, setMainMargin] = useState([]);
   const [mainPadding, setMainPadding] = useState([]);
 
@@ -196,7 +251,7 @@ const TopHeaderEditor = () => {
         {
           id: "1",
           link: "",
-          icon: <InstagramIcon className="" sx={{ color: "white" }} />,
+          icon: <InstagramIcon className='' sx={{ color: "white" }} />,
         },
       ],
       style: {
@@ -220,13 +275,7 @@ const TopHeaderEditor = () => {
     },
     icon: {
       disable: false,
-      icons: [
-        {
-          id: "1",
-          link: "",
-          icon: <InstagramIcon className="" sx={{ color: "white" }} />,
-        },
-      ],
+      icons: leftIconList,
       customClass: "",
       style: {
         alignItems: "center",
@@ -239,11 +288,9 @@ const TopHeaderEditor = () => {
     },
   };
 
-  console.log(mainMargin);
-
   return (
     <>
-      <Box backgroundColor="white" padding={"10px"}>
+      <Box backgroundColor='white' padding={"10px"}>
         <TopHeader
           ref={topHeaderRef}
           disabled={disabled}
@@ -254,7 +301,7 @@ const TopHeaderEditor = () => {
         />
       </Box>
       <TopHeaderEditorEl>
-        <Typography variant="h5" fontWeight="bolder" marginBottom={"10px"}>
+        <Typography variant='h5' fontWeight='bolder' marginBottom={"10px"}>
           Main Content
         </Typography>
         <Box marginBottom={"30px"}>
@@ -270,10 +317,10 @@ const TopHeaderEditor = () => {
         <Grid container>
           <Grid item xs={6} borderRight={"1px solid black"}>
             <Typography
-              variant="h5"
-              fontWeight="bolder"
-              marginTop="10px"
-              marginBottom="20px"
+              variant='h5'
+              fontWeight='bolder'
+              marginTop='10px'
+              marginBottom='20px'
             >
               Left Side Content
             </Typography>
@@ -294,7 +341,7 @@ const TopHeaderEditor = () => {
                   </Grid>
                 </Grid>
               </Box>
-              <Typography variant="h6" fontWeight="bold" marginBottom="8px">
+              <Typography variant='h6' fontWeight='bold' marginBottom='8px'>
                 Icons
               </Typography>
               {/* AddIcon */}
@@ -310,20 +357,33 @@ const TopHeaderEditor = () => {
                   backgroundColor: "#f5f5f5",
                 }}
               >
-                <IconButton onClick={() => handleDialogOpen()}>
-                  <AddIcon htmlColor="rgb(79 79 79 / 87%)" />
-                </IconButton>
-                <Modal
-                  dialogOpen={dialogOpen}
-                  handleClose={() => handleDialogClose()}
-                  content={
-                    <LeftModalContent
-                      leftIconObj={leftIconObj}
-                      setLeftIconObj={(val) => setLeftIconObj(val)}
-                    />
-                  }
-                />
+                {leftIconList?.map((el) => {
+                  return (
+                    <Grid item key={el?.icon}>
+                      <SvgIcon
+                        componen={MuiIcon[el?.icon]}
+                        fontSize={el?.font}
+                        htmlColor={el?.color}
+                      ></SvgIcon>
+                    </Grid>
+                  );
+                })}
+                <Grid item>
+                  <IconButton onClick={() => handleDialogOpen()}>
+                    <AddIcon htmlColor='rgb(79 79 79 / 87%)' />
+                  </IconButton>
+                </Grid>
               </Grid>
+              <Modal
+                dialogOpen={dialogOpen}
+                handleClose={() => handleDialogClose()}
+                content={
+                  <LeftModalContent
+                    leftIconList={leftIconList}
+                    setLeftIconList={(val) => setLeftIconList(val)}
+                  />
+                }
+              />
               {/* AddIcon */}
             </Box>
             <h3>Text</h3>

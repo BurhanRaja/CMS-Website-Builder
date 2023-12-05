@@ -5,6 +5,8 @@ import {
   Toolbar as MuiToolbar,
   Grid,
   Typography,
+  SvgIcon,
+  Icon as MuiIcon,
 } from "@mui/material";
 import { Fragment, useEffect, useRef } from "react";
 import { styled } from "@mui/material/styles";
@@ -59,7 +61,13 @@ function RightTopHeader({ content }) {
                     href={el?.link}
                     style={{ display: "flex", alignItems: "center" }}
                   >
-                    {el?.icon}
+                    <SvgIcon
+                      className={el?.customClass}
+                      sx={{ ...el?.style }}
+                      component={MuiIcon[el?.icon]}
+                      htmlColor={el?.color}
+                      fontSize={el?.fontSize}
+                    />
                   </Link>
                 </Fragment>
               );
@@ -109,7 +117,13 @@ function LeftTopHeader({ content }) {
                       href={el?.link}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      {el?.icon}
+                      <SvgIcon
+                        className={el?.customClass}
+                        sx={{ ...el?.style }}
+                        component={MuiIcon[el?.icon]}
+                        htmlColor={el?.color}
+                        fontSize={el?.fontSize}
+                      />
                     </Link>
                   </Fragment>
                 );
@@ -153,10 +167,10 @@ const TopHeader = forwardRef(function TopHeader(
       {!disabled && (
         <Box ref={ref}>
           <AppBar>
-            <Toolbar variant="dense">
+            <Toolbar variant='dense'>
               <Grid
                 container
-                direction="row"
+                direction='row'
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
