@@ -1,7 +1,12 @@
-import TopHeaderEditor from "@/components/admin/editor/TopHeaderEditor";
+import SectionEditor from "@/components/admin/editor/SectionEditor";
+import TopHeaderEditorNew from "@/components/admin/editor/TopHeaderEditorNew";
 
 const TopHeaderDesignPage = () => {
-  return <TopHeaderEditor />;
+  return (
+    <div className='' style={{ padding: "10px" }}>
+      <SectionEditor />
+    </div>
+  );
 };
 
 export default TopHeaderDesignPage;

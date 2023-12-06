@@ -27,7 +27,7 @@ const Test = () => {
       {htmlStr}
       <button onClick={() => console.log(componentRef.current)}>Convert</button>
       <div ref={componentRef}>
-        <h1 className="carousel-component">Hello World</h1>
+        <h1 className='carousel-component'>Hello World</h1>
         <p>Hello World</p>
         <SecondTest />
       </div>

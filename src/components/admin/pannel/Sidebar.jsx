@@ -32,17 +32,22 @@ function SubMenu({ mainTitle, subMenus }) {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary={mainTitle} />
         {subMenu ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={subMenu} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
+      <Collapse in={subMenu} timeout='auto' unmountOnExit>
+        <List
+          component='div'
+          disablePadding
+          sx={{ backgroundColor: "#efefef" }}
+        >
+          {subMenus?.map((el) => {
+            return (
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={el.name} />
+              </ListItemButton>
+            );
+          })}
         </List>
       </Collapse>
     </>
@@ -92,11 +97,11 @@ function Sidebar({ drawerWidth, open, setOpen }) {
   }));
 
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant='permanent' open={open}>
       <DrawerHeader>
-        <Grid container alignItems="center">
+        <Grid container alignItems='center'>
           <Grid item xs={10}>
-            <Image src={"/logo.png"} alt="Mainlogo" width={160} height={40} />
+            <Image src={"/logo.png"} alt='Mainlogo' width={160} height={40} />
           </Grid>
           <Grid item xs={2}>
             <IconButton onClick={() => setOpen(false)}>
@@ -111,8 +116,37 @@ function Sidebar({ drawerWidth, open, setOpen }) {
       </DrawerHeader>
       <Divider />
       <List>
-        <SubMenu />
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        <SubMenu
+          mainTitle={"Defaults"}
+          subMenus={[
+            {
+              name: "Top Header",
+              icon: "",
+            },
+            {
+              name: "Main Header",
+              icon: "",
+            },
+            {
+              name: "Main Footer",
+              icon: "",
+            },
+          ]}
+        />
+        <SubMenu
+          mainTitle={"Pages"}
+          subMenus={[
+            {
+              name: "Home",
+              icon: "",
+            },
+            {
+              name: "About",
+              icon: "",
+            },
+          ]}
+        />
+        {["All mail"].map((text, index) => (
           <ListItem key={text} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{

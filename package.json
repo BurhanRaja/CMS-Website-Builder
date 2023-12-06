@@ -19,6 +19,7 @@
     "dompurify": "^3.0.6",
     "eslint-config-next": "^14.0.3",
     "framer-motion": "^10.16.14",
+    "html-react-parser": "^5.0.7",
     "html-to-jsx-transform": "^1.1.0",
     "next": "^14.0.3",
     "react": "^18.2.0",

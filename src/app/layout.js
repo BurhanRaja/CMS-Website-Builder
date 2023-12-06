@@ -1,5 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "../css/bootstrap.css";
+import "../css/bootstrap.min.css";
+import "../css/progress-tracker.css";
+import "../css/responsive.css";
+import "../css/style.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +15,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>
+        <script src='https://code.jquery.com/jquery-3.6.0.slim.min.js'></script>
+        <script src={"/bootstrap.bundle.min.js"}></script>
+        <script src={"/bootstrap.min.js"}></script>
+        <script src={"/custom.js"}></script>
+        <script src={"/html5shiv.js"}></script>
+        <script src={"/owl.carousel.min.js"}></script>
+        <script src={"/respond.min.js"}></script>
+        <script src={"/ie10-viewport-bug-workaround"}></script>
         {/* <ChakraUIProvider> */}
         {children}
         {/* </ChakraUIProvider> */}
