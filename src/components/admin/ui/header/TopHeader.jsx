@@ -6,8 +6,8 @@ import {
   Grid,
   Typography,
   SvgIcon,
-  Icon as MuiIcon,
 } from "@mui/material";
+import * as MuiIcon from "@mui/icons-material";
 import { Fragment, useEffect, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
@@ -63,9 +63,14 @@ function RightTopHeader({ content }) {
                   >
                     <SvgIcon
                       className={el?.customClass}
-                      sx={{ ...el?.style }}
+                      sx={{
+                        ...el?.style,
+                        color: el?.color,
+                        fontSize: el?.fontSize,
+                      }}
                       component={MuiIcon[el?.icon]}
                       htmlColor={el?.color}
+                      color={el?.color}
                       fontSize={el?.fontSize}
                     />
                   </Link>
@@ -119,9 +124,14 @@ function LeftTopHeader({ content }) {
                     >
                       <SvgIcon
                         className={el?.customClass}
-                        sx={{ ...el?.style }}
+                        sx={{
+                          ...el?.style,
+                          color: el?.color,
+                          fontSize: el?.fontSize,
+                        }}
                         component={MuiIcon[el?.icon]}
                         htmlColor={el?.color}
+                        color={el?.color}
                         fontSize={el?.fontSize}
                       />
                     </Link>
@@ -167,10 +177,10 @@ const TopHeader = forwardRef(function TopHeader(
       {!disabled && (
         <Box ref={ref}>
           <AppBar>
-            <Toolbar variant='dense'>
+            <Toolbar variant="dense">
               <Grid
                 container
-                direction='row'
+                direction="row"
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >

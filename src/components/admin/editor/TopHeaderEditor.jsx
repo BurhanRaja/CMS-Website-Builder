@@ -27,6 +27,7 @@ import { useColor, ColorPicker } from "react-color-palette";
 import "react-color-palette/css";
 import Margin from "./ui/Margin";
 import Padding from "./ui/Padding";
+import FlexDirection from "./ui/FlexDirection";
 
 const TopHeaderEditorEl = styled("div")(() => ({
   marginTop: "50px",
@@ -47,8 +48,8 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
       customClass,
       style: { ...customCss },
       icon: leftIconObj.icon,
-      color,
-      fontSize: customFont,
+      color: color.hex,
+      fontSize: `${customFont}px`,
       link,
     };
     let allIcons = [...leftIconList, data];
@@ -57,7 +58,7 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
 
   return (
     <>
-      <Typography variant='body1' marginBottom={"10px"} fontWeight={"bold"}>
+      <Typography variant="body1" marginBottom={"10px"} fontWeight={"bold"}>
         Social Icons
       </Typography>
       <Box display={"flex"} justifyContent={"space-between"} flexWrap={"wrap"}>
@@ -108,16 +109,16 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
           </Box>
           <Box marginTop={"5px"}>
             <Grid container>
-              <Grid item>
+              <Grid item xs={6}>
                 <Box>
                   <InputLabel>Link</InputLabel>
                   <InputBase
-                    type='text'
-                    style={{
+                    type="text"
+                    sx={{
                       border: "1px solid gray",
                       padding: "5px",
-                      width: "80%",
                       borderRadius: "5px",
+                      width: "85%",
                       height: "40px",
                     }}
                     value={link}
@@ -128,12 +129,12 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
                 <Box marginTop={"12px"}>
                   <InputLabel>Custom Class</InputLabel>
                   <InputBase
-                    type='text'
-                    style={{
+                    type="text"
+                    sx={{
                       border: "1px solid gray",
                       padding: "5px",
-                      width: "80%",
                       borderRadius: "5px",
+                      width: "85%",
                       height: "40px",
                     }}
                     value={customClass}
@@ -144,13 +145,13 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
                 <Box marginTop={"12px"}>
                   <InputLabel>Font Size</InputLabel>
                   <InputBase
-                    type='text'
-                    style={{
+                    type="text"
+                    sx={{
                       border: "1px solid gray",
                       padding: "5px",
-                      width: "80%",
                       borderRadius: "5px",
                       height: "40px",
+                      width: "85%",
                     }}
                     value={customFont}
                     onChange={(e) => setCustomFont(e.target.value)}
@@ -160,15 +161,15 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
                 </Box>
                 <Box marginTop={"12px"}>
                   <InputLabel>Custom CSS</InputLabel>
-                  <Typography variant='caption'>
+                  <Typography variant="caption">
                     (Wrtie CSS directly)
                   </Typography>
                   <TextField
                     sx={{
-                      width: "90%",
+                      width: "85%",
                     }}
                     hiddenLabel
-                    id='outlined-multiline-static'
+                    id="outlined-multiline-static"
                     multiline
                     rows={5}
                     value={customCss}
@@ -177,7 +178,7 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
                 </Box>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant='body1'>Select Color</Typography>
+                <Typography variant="body1">Select Color</Typography>
                 <ColorPicker
                   hideInput={["rgb", "hsv"]}
                   color={color}
@@ -187,7 +188,7 @@ const LeftModalContent = ({ leftIconList, setLeftIconList }) => {
             </Grid>
             <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
               <Button
-                variant='contained'
+                variant="contained"
                 sx={{ marginTop: "20px", width: "40%" }}
                 onClick={handleAddIcon}
               >
@@ -207,6 +208,7 @@ const TopHeaderEditor = () => {
   const [leftJC, setLeftJC] = useState("start");
   const [leftAI, setLeftAI] = useState("start");
   const [leftIconList, setLeftIconList] = useState([]);
+  const [leftTextColor, setLeftTextColor] = useColor("black");
 
   const [mainMargin, setMainMargin] = useState([]);
   const [mainPadding, setMainPadding] = useState([]);
@@ -218,6 +220,8 @@ const TopHeaderEditor = () => {
   function handleDialogOpen() {
     setDialogOpen(true);
   }
+
+  console.log(leftIconList);
 
   let disabled = false;
   let headerStyle = {
@@ -251,7 +255,7 @@ const TopHeaderEditor = () => {
         {
           id: "1",
           link: "",
-          icon: <InstagramIcon className='' sx={{ color: "white" }} />,
+          icon: <InstagramIcon className="" sx={{ color: "white" }} />,
         },
       ],
       style: {
@@ -290,7 +294,7 @@ const TopHeaderEditor = () => {
 
   return (
     <>
-      <Box backgroundColor='white' padding={"10px"}>
+      <Box backgroundColor="white" padding={"10px"}>
         <TopHeader
           ref={topHeaderRef}
           disabled={disabled}
@@ -301,7 +305,7 @@ const TopHeaderEditor = () => {
         />
       </Box>
       <TopHeaderEditorEl>
-        <Typography variant='h5' fontWeight='bolder' marginBottom={"10px"}>
+        <Typography variant="h5" fontWeight="bolder" marginBottom={"10px"}>
           Main Content
         </Typography>
         <Box marginBottom={"30px"}>
@@ -315,12 +319,17 @@ const TopHeaderEditor = () => {
           </Grid>
         </Box>
         <Grid container>
-          <Grid item xs={6} borderRight={"1px solid black"}>
+          <Grid
+            item
+            xs={6}
+            borderRight={"1px solid black"}
+            paddingRight={"10px"}
+          >
             <Typography
-              variant='h5'
-              fontWeight='bolder'
-              marginTop='10px'
-              marginBottom='20px'
+              variant="h5"
+              fontWeight="bolder"
+              marginTop="10px"
+              marginBottom="20px"
             >
               Left Side Content
             </Typography>
@@ -339,38 +348,64 @@ const TopHeaderEditor = () => {
                       setName={(val) => setLeftAI(val)}
                     />
                   </Grid>
+                  <Grid item xs={4}>
+                    <FlexDirection />
+                  </Grid>
                 </Grid>
               </Box>
-              <Typography variant='h6' fontWeight='bold' marginBottom='8px'>
+              <Typography variant="h6" fontWeight="bold" marginBottom="8px">
                 Icons
               </Typography>
               {/* AddIcon */}
               <Grid
                 container
-                justifyContent={"center"}
+                justifyContent={"start"}
+                columnGap={2}
                 alignItems={"center"}
-                sx={{
-                  padding: "10px 10px",
-                  borderRadius: "7px",
-                  width: "80px",
-                  height: "80px",
-                  backgroundColor: "#f5f5f5",
-                }}
               >
                 {leftIconList?.map((el) => {
                   return (
-                    <Grid item key={el?.icon}>
+                    <Grid
+                      item
+                      display={"flex"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      sx={{
+                        padding: "10px 10px",
+                        borderRadius: "7px",
+                        width: "80px",
+                        height: "80px",
+                        backgroundColor: "#f5f5f5",
+                      }}
+                      key={el?.icon}
+                    >
                       <SvgIcon
-                        componen={MuiIcon[el?.icon]}
-                        fontSize={el?.font}
+                        component={MuiIcon[el?.icon]}
                         htmlColor={el?.color}
+                        color={el?.color}
+                        sx={{
+                          ...el?.style,
+                          color: el?.color,
+                        }}
                       ></SvgIcon>
                     </Grid>
                   );
                 })}
-                <Grid item>
+                <Grid
+                  item
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  sx={{
+                    padding: "10px 10px",
+                    borderRadius: "7px",
+                    width: "80px",
+                    height: "80px",
+                    backgroundColor: "#f5f5f5",
+                  }}
+                >
                   <IconButton onClick={() => handleDialogOpen()}>
-                    <AddIcon htmlColor='rgb(79 79 79 / 87%)' />
+                    <AddIcon htmlColor="rgb(79 79 79 / 87%)" />
                   </IconButton>
                 </Grid>
               </Grid>
@@ -387,6 +422,44 @@ const TopHeaderEditor = () => {
               {/* AddIcon */}
             </Box>
             <h3>Text</h3>
+            <Grid container>
+              <Grid item xs={6} marginRight={"15px"}>
+                <InputLabel>Content</InputLabel>
+                <InputBase
+                  type="text"
+                  sx={{
+                    border: "1px solid gray",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    height: "40px",
+                    width: "100%",
+                    marginBottom: "10px",
+                  }}
+                />
+                <InputLabel>Font Size</InputLabel>
+                <InputBase
+                  type="text"
+                  sx={{
+                    border: "1px solid gray",
+                    padding: "5px",
+                    borderRadius: "5px",
+                    height: "40px",
+                  }}
+                  endAdornment={"px"}
+                />
+              </Grid>
+              <Grid item xs={5}>
+                <InputLabel>Select Color</InputLabel>
+                <ColorPicker
+                  style={{
+                    width: "100%",
+                  }}
+                  hideInput={["rgb", "hsv", "hex"]}
+                  color={leftTextColor}
+                  onChange={setLeftTextColor}
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={6} paddingLeft={"10px"}>
             <h2>Right Side Content</h2>
