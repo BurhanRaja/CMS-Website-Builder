@@ -24,10 +24,7 @@ const AdminLayout = ({ children }) => {
         open={open}
         setOpen={(val) => setOpen(val)}
       />
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "#e9e9e9" }}
-      >
+      <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {children}
       </Box>
