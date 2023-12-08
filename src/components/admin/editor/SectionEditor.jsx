@@ -69,6 +69,11 @@ const Col = ({ colId, index, rowIndex, content }) => {
   );
 };
 
+// Add Image Type in in the column,
+// Add Media Menu where all the media will be stored
+// Handle column HTML and show preview
+// storing data in database via API
+
 const SectionEditor = () => {
   const [rows, setRows] = useState([
     {
@@ -89,7 +94,6 @@ const SectionEditor = () => {
   useEffect(() => {
     if (submitData["colId"]) {
       let allRows = rows;
-      console.log(allRows[submitData["rowIndex"]].cols[submitData["index"]]);
       allRows[submitData["rowIndex"]].cols[submitData["index"]] = {
         ...allRows[submitData["rowIndex"]].cols[submitData["index"]],
         content: submitData.content,
@@ -187,13 +191,13 @@ const SectionEditor = () => {
             <Fragment key={row.id}>
               <Row>
                 <Box paddingLeft={"15px"} marginBottom={"10px"}>
-                  <InputLabel id='demo-simple-select-label'>
+                  <InputLabel id="demo-simple-select-label">
                     Column Division
                   </InputLabel>
                   <Select
                     value={row?.columnType}
                     onChange={(e) => handleColumType(e.target.value, index)}
-                    size='small'
+                    size="small"
                     sx={{
                       width: "30%",
                       backgroundColor: "white",
@@ -243,7 +247,7 @@ const SectionEditor = () => {
                     sx={{ backgroundColor: "#bebebe" }}
                     onClick={() => handleRowSwap(index, index + 1)}
                   >
-                    <SwapVertIcon htmlColor='black' />
+                    <SwapVertIcon htmlColor="black" />
                   </IconButton>
                 </Box>
               )}

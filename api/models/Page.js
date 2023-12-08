@@ -1,16 +1,17 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  const Admin = sequelize.define(
-    "Admin",
+  const Page = sequelize.define(
+    "Page",
     {
+      uniqueId: DataTypes.STRING,
       name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      endpoint: DataTypes.STRING,
+      htmlCode: DataTypes.STRING,
     },
     {
       timestamps: true,
     }
   );
 
-  return Admin;
+  return Page;
 };
