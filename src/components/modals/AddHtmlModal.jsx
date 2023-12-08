@@ -1,13 +1,14 @@
 "use client";
 import { ModalContext } from "@/context/context";
 import { Box, InputLabel, TextField, IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
+import CKEditor from "../admin/editor/ui/Editor";
 
 const AddHtmlModal = () => {
   const { data, type, isOpen, onClose } = useContext(ModalContext);
@@ -40,16 +41,9 @@ const AddHtmlModal = () => {
       <DialogContent>
         <Box marginTop='40px'>
           <InputLabel>Write your HTML</InputLabel>
-          <TextField
-            sx={{
-              width: "100%",
-            }}
-            hiddenLabel
-            id='top-header-html'
-            multiline
-            rows={10}
-            value={htmlContent}
-            onChange={(e) => setHtmlContent(e.target.value)}
+          <CKEditor
+            initialData={htmlContent}
+            setContent={(val) => setHtmlContent(val)}
           />
         </Box>
       </DialogContent>

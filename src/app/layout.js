@@ -6,6 +6,7 @@ import "../css/progress-tracker.css";
 import "../css/responsive.css";
 import "../css/style.css";
 import ModalProvider from "@/components/providers/ModalProvider";
+import PreviewProvider from "@/components/providers/PreviewProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function RootLayout({ children }) {
         <script src={"/respond.min.js"}></script>
         <script src={"/ie10-viewport-bug-workaround"}></script>
         {/* <ChakraUIProvider> */}
-        <ModalProvider>{children}</ModalProvider>
+        <ModalProvider>
+          <PreviewProvider>{children}</PreviewProvider>
+        </ModalProvider>
         {/* </ChakraUIProvider> */}
       </body>
     </html>
