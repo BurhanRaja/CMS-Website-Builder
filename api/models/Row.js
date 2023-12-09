@@ -1,11 +1,13 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  const Page = sequelize.define(
-    "Page",
+  const Row = sequelize.define(
+    "Row",
     {
       uniqueId: DataTypes.STRING,
       pageId: DataTypes.INTEGER,
       columnType: DataTypes.STRING,
+      margin: DataTypes.STRING,
+      padding: DataTypes.STRING,
       rowIndex: DataTypes.STRING,
     },
     {
@@ -13,5 +15,5 @@ module.exports = (sequelize) => {
     }
   );
 
-  return Page;
+  return Row;
 };

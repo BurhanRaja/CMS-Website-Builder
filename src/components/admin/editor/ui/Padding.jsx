@@ -3,11 +3,13 @@
 import { Grid, InputAdornment, InputBase, Typography } from "@mui/material";
 import { useState } from "react";
 
-const Padding = ({ setPadding }) => {
-  const [padTop, setPadTop] = useState("0");
-  const [padLeft, setPadLeft] = useState("0");
-  const [padBottom, setPadBottom] = useState("0");
-  const [padRight, setPadRight] = useState("0");
+const Padding = ({ padding, setPadding }) => {
+  const [padTop, setPadTop] = useState(padding?.length ? padding[0] : "0");
+  const [padLeft, setPadLeft] = useState(padding?.length ? padding[1] : "0");
+  const [padBottom, setPadBottom] = useState(
+    padding?.length ? padding[2] : "0"
+  );
+  const [padRight, setPadRight] = useState(padding?.length ? padding[3] : "0");
 
   const handleAllPadding = (top, left, bottom, right) => {
     setPadTop(top);
@@ -19,7 +21,7 @@ const Padding = ({ setPadding }) => {
 
   return (
     <>
-      <Typography variant='body1' marginBottom={"3px"} color={"black"}>
+      <Typography variant="body1" marginBottom={"3px"} color={"black"}>
         Padding
       </Typography>
       <Grid container columnGap={2}>
@@ -33,7 +35,7 @@ const Padding = ({ setPadding }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={padTop}
             onChange={(e) =>
               handleAllPadding(e.target.value, padLeft, padBottom, padRight)
@@ -53,7 +55,7 @@ const Padding = ({ setPadding }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={padLeft}
             onChange={(e) =>
               handleAllPadding(padTop, e.target.value, padBottom, padRight)
@@ -73,7 +75,7 @@ const Padding = ({ setPadding }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={padBottom}
             onChange={(e) =>
               handleAllPadding(padTop, padLeft, e.target.value, padRight)
@@ -93,7 +95,7 @@ const Padding = ({ setPadding }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={padRight}
             onChange={(e) =>
               handleAllPadding(padTop, padLeft, padBottom, e.target.value)

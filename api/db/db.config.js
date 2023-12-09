@@ -1,6 +1,6 @@
 module.exports = {
   dbName: "visualcms",
-  dbUsername: "",
+  dbUsername: "root",
   dbPassword: "",
   dbHost: "localhost",
   dbPort: 3306,

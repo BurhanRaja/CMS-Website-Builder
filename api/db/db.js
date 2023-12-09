@@ -38,5 +38,6 @@ db.admin = require("../models/Admin")(sequelize);
 db.pages = require("../models/Page")(sequelize);
 db.rows = require("../models/Row")(sequelize);
 db.columns = require("../models/Column")(sequelize);
+db.menus = require("../models/Menu")(sequelize);
 
 module.exports = db;

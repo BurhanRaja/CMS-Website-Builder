@@ -13,12 +13,11 @@ import {
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import EditIcon from "@mui/icons-material/Edit";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { ModalContext, PreviewContext } from "@/context/context";
+import { ModalContext } from "@/context/context";
 import { v4 as uuid } from "uuid";
-import { TableRowsOutlined } from "@mui/icons-material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-import Margin from "./ui/Margin";
-import Padding from "./ui/Padding";
+import CloseIcon from "@mui/icons-material/Close";
+import RowModal from "@/components/modals/RowModal";
 
 const Row = ({ children }) => {
   return (
@@ -80,7 +79,7 @@ const Col = ({ colId, index, rowIndex, content }) => {
                   width: "150px",
                 }}
               >
-                <Typography variant='body2'>Raw HTML</Typography>
+                <Typography variant="body2">Raw HTML</Typography>
                 <IconButton
                   sx={{ paddingRight: "0", paddingLeft: "0" }}
                   onClick={() => {
@@ -91,7 +90,7 @@ const Col = ({ colId, index, rowIndex, content }) => {
                         rowIndex,
                         content,
                       },
-                      "addContent"
+                      "editContent"
                     );
                   }}
                 >
@@ -117,22 +116,27 @@ const Col = ({ colId, index, rowIndex, content }) => {
 // Handle column HTML and show preview
 // storing data in database via API
 
-const SectionEditor = () => {
-  const [rows, setRows] = useState([
-    {
-      id: uuid(),
-      columnType: "one",
-      padding: "",
-      margin: "",
-      cols: [
-        {
-          id: uuid(),
-          width: "99%",
-          content: "",
-        },
-      ],
-    },
-  ]);
+const SectionEditor = ({ rowData }) => {
+  const [rows, setRows] = useState(
+    rowData
+      ? rowData
+      : [
+          {
+            id: uuid(),
+            columnType: "one",
+            padding: "",
+            margin: "",
+            cols: [
+              {
+                id: uuid(),
+                width: "99%",
+                content: "",
+              },
+            ],
+          },
+        ]
+  );
+  const [openRowModal, setOpenRowModal] = useState(false);
 
   const { submitData, setSubmitData, onOpen } = useContext(ModalContext);
 
@@ -240,12 +244,10 @@ const SectionEditor = () => {
   };
 
   const handleRowSwap = (index, newIndex) => {
-    let allRows = rows;
-    let temp = allRows[index];
-    allRows[index] = allRows[newIndex];
-    allRows[newIndex] = temp;
-    console.log(allRows);
-    setRows(allRows);
+    let temp = rows[index];
+    rows[index] = rows[newIndex];
+    rows[newIndex] = temp;
+    setRows([...rows]);
     console.log(rows);
   };
 
@@ -268,7 +270,10 @@ const SectionEditor = () => {
     onOpen({ content: innerContent }, "previewContent");
   };
 
-  console.log(rows);
+  const removeRow = () => {
+    rows.pop();
+    setRows([...rows]);
+  };
 
   return (
     <>
@@ -276,52 +281,72 @@ const SectionEditor = () => {
         <IconButton onClick={() => addRow()}>
           <AddBoxIcon sx={{ fontSize: "40px", color: "" }} />
         </IconButton>
-        <Button variant='contained' onClick={() => handleShowPreview()}>
+        <Button variant="contained" onClick={() => handleShowPreview()}>
           Preview
         </Button>
         {rows?.map((row, index) => {
           return (
             <Fragment key={row.id}>
               <Row>
-                <Grid container paddingLeft={"15px"} marginBottom={"10px"}>
-                  <Grid item xs={4}>
-                    <InputLabel id='demo-simple-select-label'>
-                      Column Division
-                    </InputLabel>
-                    <Select
-                      value={row?.columnType}
-                      onChange={(e) => handleColumType(e.target.value, index)}
-                      size='small'
+                <Grid
+                  container
+                  justifyContent={"end"}
+                  alignItems={"center"}
+                  padding={"5px"}
+                  marginRight={"10px"}
+                >
+                  <Grid item marginRight={"5px"}>
+                    <RowModal
+                      open={openRowModal}
+                      rowIndex={row?.id}
+                      setOpen={(val) => setOpenRowModal(val)}
+                      columnType={row?.columnType}
+                      margin={row?.margin?.replace("px", "").split(" ")}
+                      padding={row?.padding?.replace("px", "").split(" ")}
+                      handleColumType={(val, rowIndex) =>
+                        handleColumType(val, index)
+                      }
+                      handleMargin={(val, rowIndex) => handleMargin(val, index)}
+                      handlePadding={(val, rowIndex) =>
+                        handlePadding(val, index)
+                      }
+                    />
+                    <IconButton
                       sx={{
-                        width: "80%",
-                        backgroundColor: "white",
-                        color: "black",
+                        ":hover": {
+                          color: "black",
+                        },
+                        backgroundColor: "grey",
+                        color: "white",
+                        borderRadius: "5px",
+                      }}
+                      onClick={() => setOpenRowModal(true)}
+                    >
+                      <EditIcon
+                        sx={{
+                          fontSize: "18px",
+                        }}
+                      />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      sx={{
+                        ":hover": {
+                          color: "black",
+                        },
+                        backgroundColor: "grey",
+                        color: "white",
+                        borderRadius: "5px",
                       }}
                     >
-                      <MenuItem value={"one"} selected>
-                        1
-                      </MenuItem>
-                      <MenuItem value={"half-half"}>1/2 + 1/2</MenuItem>
-                      <MenuItem value={"three-three-three"}>
-                        1/3 + 1/3 + 1/3
-                      </MenuItem>
-                      <MenuItem value={"four-four-four-four"}>
-                        1/4 + 1/4 + 1/4 + 1/4
-                      </MenuItem>
-                      <MenuItem value={"four-threefour"}>1/4 + 3/4</MenuItem>
-                      <MenuItem value={"five-five-five-five-five"}>
-                        1/5 + 1/5 + 1/5 + 1/5 + 1/5
-                      </MenuItem>
-                      <MenuItem value={"six-six-six-six-six-six"}>
-                        1/6 + 1/6 + 1/6 + 1/6 + 1/6 + 1/6
-                      </MenuItem>
-                    </Select>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Margin setMargin={(val) => handleMargin(val, index)} />
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Padding setPadding={(val) => handlePadding(val, index)} />
+                      <CloseIcon
+                        sx={{
+                          fontSize: "18px",
+                        }}
+                        onClick={() => removeRow()}
+                      />
+                    </IconButton>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent={"space-evenly"}>
@@ -351,7 +376,7 @@ const SectionEditor = () => {
                     sx={{ backgroundColor: "#bebebe" }}
                     onClick={() => handleRowSwap(index, index + 1)}
                   >
-                    <SwapVertIcon htmlColor='black' />
+                    <SwapVertIcon htmlColor="black" />
                   </IconButton>
                 </Box>
               )}

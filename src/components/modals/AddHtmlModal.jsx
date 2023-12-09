@@ -20,26 +20,26 @@ const AddHtmlModal = () => {
     <Dialog
       open={isModalOpen}
       onClose={() => onClose({})}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
       maxWidth={"lg"}
       fullWidth
       sx={{ padding: "10px" }}
     >
       <Box position={"relative"}>
         <IconButton
-          color='black'
+          color="black"
           sx={{ position: "absolute", top: 0, right: 0 }}
           onClick={() => onClose({})}
         >
           <CloseIcon />
         </IconButton>
       </Box>
-      <DialogTitle sx={{ color: "black" }} id='alert-dialog-title'>
+      <DialogTitle sx={{ color: "black" }} id="alert-dialog-title">
         {"Handle Column Content"}
       </DialogTitle>
       <DialogContent>
-        <Box marginTop='40px'>
+        <Box marginTop="40px">
           <InputLabel>Write your HTML</InputLabel>
           <CKEditor
             initialData={htmlContent}
@@ -49,7 +49,7 @@ const AddHtmlModal = () => {
       </DialogContent>
       <DialogActions>
         <Button
-          variant='contained'
+          variant="contained"
           onClick={() => {
             onClose({
               colId: data.colId,

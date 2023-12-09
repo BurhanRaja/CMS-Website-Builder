@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
       name: DataTypes.STRING,
       endpoint: DataTypes.STRING,
       htmlCode: DataTypes.STRING,
+      published: DataTypes.INTEGER,
     },
     {
       timestamps: true,

@@ -4,6 +4,7 @@ import { ModalContext } from "@/context/context";
 import { useState } from "react";
 import AddHtmlModal from "../modals/AddHtmlModal";
 import PreviewModal from "../modals/PreviewModal";
+import EditHtmlModal from "../modals/EditHtmlModal";
 
 const ModalProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ const ModalProvider = ({ children }) => {
         }}
       >
         <AddHtmlModal />
+        <EditHtmlModal />
         <PreviewModal />
         {children}
       </ModalContext.Provider>

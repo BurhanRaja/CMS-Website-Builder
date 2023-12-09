@@ -3,11 +3,15 @@
 import { Grid, InputAdornment, InputBase, Typography } from "@mui/material";
 import { useState } from "react";
 
-const Margin = ({ setMargin }) => {
-  const [marTop, setMarTop] = useState("0");
-  const [marLeft, setMarLeft] = useState("0");
-  const [marRight, setMarRight] = useState("0");
-  const [marBottom, setMarBottom] = useState("0");
+const Margin = ({ margin, setMargin }) => {
+  const [marTop, setMarTop] = useState(margin?.length > 0 ? margin[0] : "0");
+  const [marLeft, setMarLeft] = useState(margin?.length > 0 ? margin[1] : "0");
+  const [marRight, setMarRight] = useState(
+    margin?.length > 0 ? margin[2] : "0"
+  );
+  const [marBottom, setMarBottom] = useState(
+    margin?.length > 0 ? margin[3] : "0"
+  );
 
   const handleAllMargin = (top, left, bottom, right) => {
     setMarTop(top);
@@ -19,7 +23,7 @@ const Margin = ({ setMargin }) => {
 
   return (
     <>
-      <Typography variant='body1' marginBottom={"3px"} color={"black"}>
+      <Typography variant="body1" marginBottom={"3px"} color={"black"}>
         Margin
       </Typography>
       <Grid container columnGap={2}>
@@ -33,7 +37,7 @@ const Margin = ({ setMargin }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={marTop}
             onChange={(e) =>
               handleAllMargin(e.target.value, marLeft, marBottom, marRight)
@@ -53,7 +57,7 @@ const Margin = ({ setMargin }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={marLeft}
             onChange={(e) =>
               handleAllMargin(marTop, e.target.value, marBottom, marRight)
@@ -73,7 +77,7 @@ const Margin = ({ setMargin }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={marBottom}
             onChange={(e) =>
               handleAllMargin(marTop, marLeft, e.target.value, marRight)
@@ -93,7 +97,7 @@ const Margin = ({ setMargin }) => {
               width: "65px",
               backgroundColor: "white",
             }}
-            type='text'
+            type="text"
             value={marRight}
             onChange={(e) =>
               handleAllMargin(marTop, marLeft, marBottom, e.target.value)

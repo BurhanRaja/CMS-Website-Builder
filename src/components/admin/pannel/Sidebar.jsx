@@ -18,6 +18,7 @@ import Image from "next/image";
 import { Collapse, Grid } from "@mui/material";
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import { useState } from "react";
+import Link from "next/link";
 
 function SubMenu({ mainTitle, subMenus }) {
   const [subMenu, setSubmenu] = useState(false);
@@ -35,17 +36,22 @@ function SubMenu({ mainTitle, subMenus }) {
         <ListItemText primary={mainTitle} />
         {subMenu ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={subMenu} timeout='auto' unmountOnExit>
+      <Collapse in={subMenu} timeout="auto" unmountOnExit>
         <List
-          component='div'
+          component="div"
           disablePadding
           sx={{ backgroundColor: "#efefef" }}
         >
           {subMenus?.map((el) => {
             return (
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={el.name} />
-              </ListItemButton>
+              <Link
+                href={el?.link}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  <ListItemText primary={el.name} />
+                </ListItemButton>
+              </Link>
             );
           })}
         </List>
@@ -97,11 +103,11 @@ function Sidebar({ drawerWidth, open, setOpen }) {
   }));
 
   return (
-    <Drawer variant='permanent' open={open}>
+    <Drawer variant="permanent" open={open}>
       <DrawerHeader>
-        <Grid container alignItems='center'>
+        <Grid container alignItems="center">
           <Grid item xs={10}>
-            <Image src={"/logo.png"} alt='Mainlogo' width={160} height={40} />
+            <Image src={"/logo.png"} alt="Mainlogo" width={160} height={40} />
           </Grid>
           <Grid item xs={2}>
             <IconButton onClick={() => setOpen(false)}>
@@ -122,14 +128,17 @@ function Sidebar({ drawerWidth, open, setOpen }) {
             {
               name: "Top Header",
               icon: "",
+              link: "/admin/default/header/topheader",
             },
             {
               name: "Main Header",
               icon: "",
+              link: "",
             },
             {
               name: "Main Footer",
               icon: "",
+              link: "",
             },
           ]}
         />
@@ -137,12 +146,14 @@ function Sidebar({ drawerWidth, open, setOpen }) {
           mainTitle={"Pages"}
           subMenus={[
             {
-              name: "Home",
+              name: "All Pages",
               icon: "",
+              link: `/admin/pages/all`,
             },
             {
-              name: "About",
+              name: "Add Page",
               icon: "",
+              link: "/admin/pages/add",
             },
           ]}
         />
