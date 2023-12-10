@@ -1,6 +1,8 @@
 import SectionEditor from "@/components/admin/editor/SectionEditor";
 
-const Page = () => {
+const Page = ({ params }) => {
+  // const response = await
+
   return (
     <>
       <div className="" style={{ padding: "10px" }}>

@@ -1,4 +1,5 @@
 const { pages, rows, columns } = require("../db/db");
+const crypto = require("crypto");
 const Page = pages;
 const Rows = rows;
 const Columns = columns;
@@ -28,9 +29,7 @@ exports.createPage = async (req, res) => {
   let success = false;
 
   try {
-    const { uniqueId, name, endpoint, published, htmlCode, rows } = req.body;
-
-    console.log(req.body);
+    const { name, shortDesc, endpoint, published, htmlCode, rows } = req.body;
 
     let page = await Page.findOne({
       where: {
@@ -46,8 +45,21 @@ exports.createPage = async (req, res) => {
       });
     }
 
+    let uniqueId = crypto.randomBytes(10).toString("hex");
+
+    page = await Page.findOne({
+      where: {
+        uniqueId,
+      },
+    });
+
+    if (page) {
+      uniqueId += crypto.randomBytes(4).toString("hex");
+    }
+
     const newPage = await Page.create({
       name,
+      shortDesc,
       uniqueId,
       endpoint,
       published,
@@ -80,7 +92,6 @@ exports.createPage = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).send({
-      err,
       status: 500,
       success,
       message: "Internal Server Error.",
@@ -92,7 +103,7 @@ exports.editPage = async (req, res) => {
   let success = false;
 
   try {
-    const { name, endpoint, htmlCode, rows } = req.body;
+    const { name, shortDesc, endpoint, htmlCode, rows } = req.body;
     const { id } = req.params;
 
     const page = await Page.findOne({
@@ -114,6 +125,7 @@ exports.editPage = async (req, res) => {
         name,
         endpoint,
         htmlCode,
+        shortDesc,
       },
       { where: { id } }
     );

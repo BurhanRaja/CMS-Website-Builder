@@ -4,7 +4,7 @@ const Page = () => {
   return (
     <>
       <div className="" style={{ padding: "10px" }}>
-        <SectionEditor />
+        <SectionEditor type="add" />
       </div>
     </>
   );

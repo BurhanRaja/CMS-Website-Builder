@@ -1,5 +1,7 @@
+import Test from "@/components/Test";
+import "./globals.css";
 const page = () => {
-  return <div>{/* <MyComponent /> */}</div>;
+  return <Test />;
 };
 
 export default page;

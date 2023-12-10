@@ -126,19 +126,14 @@ function Sidebar({ drawerWidth, open, setOpen }) {
           mainTitle={"Defaults"}
           subMenus={[
             {
-              name: "Top Header",
-              icon: "",
-              link: "/admin/default/header/topheader",
-            },
-            {
               name: "Main Header",
               icon: "",
-              link: "",
+              link: "/admin/default/mainheader",
             },
             {
               name: "Main Footer",
               icon: "",
-              link: "",
+              link: "/admin/default/mainfooter",
             },
           ]}
         />

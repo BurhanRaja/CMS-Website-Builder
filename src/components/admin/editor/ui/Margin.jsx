@@ -1,17 +1,22 @@
 "use client";
 
 import { Grid, InputAdornment, InputBase, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Margin = ({ margin, setMargin }) => {
-  const [marTop, setMarTop] = useState(margin?.length > 0 ? margin[0] : "0");
-  const [marLeft, setMarLeft] = useState(margin?.length > 0 ? margin[1] : "0");
-  const [marRight, setMarRight] = useState(
-    margin?.length > 0 ? margin[2] : "0"
-  );
-  const [marBottom, setMarBottom] = useState(
-    margin?.length > 0 ? margin[3] : "0"
-  );
+  const [marTop, setMarTop] = useState("0");
+  const [marLeft, setMarLeft] = useState("0");
+  const [marRight, setMarRight] = useState("0");
+  const [marBottom, setMarBottom] = useState("0");
+
+  useEffect(() => {
+    if (margin?.length === 4) {
+      setMarTop(margin[0]);
+      setMarLeft(margin[1]);
+      setMarBottom(margin[2]);
+      setMarRight(margin[3]);
+    }
+  }, [margin]);
 
   const handleAllMargin = (top, left, bottom, right) => {
     setMarTop(top);

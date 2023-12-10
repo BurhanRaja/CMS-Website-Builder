@@ -36,7 +36,7 @@ const AddHtmlModal = () => {
         </IconButton>
       </Box>
       <DialogTitle sx={{ color: "black" }} id="alert-dialog-title">
-        {"Handle Column Content"}
+        {"Column Content"}
       </DialogTitle>
       <DialogContent>
         <Box marginTop="40px">

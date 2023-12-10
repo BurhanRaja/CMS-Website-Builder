@@ -1,1009 +1,1062 @@
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 600px;
-    margin: 1.75rem auto;
+    max-width: 600px !important;
+    margin: 1.75rem auto !important;
   }
   .Successfully .modal-dialog {
-    max-width: 700px;
-    margin: 1.75rem auto;
+    max-width: 700px !important;
+    margin: 1.75rem auto !important;
   }
 }
 @media only screen and (min-width: 993px) {
   .header .menu > .menu-item-child:hover > .sub-menu {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-transform: translateY(0) !important;
+    transform: translateY(0) !important;
   }
   .header .menu > .menu-item-child:hover > a .expand::after {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-    transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg) !important;
+    transform: translate(-50%, -50%) rotate(0deg) !important;
   }
   .responsive-tabs .nav-tabs {
-    display: flex;
+    display: flex !important;
   }
   .responsive-tabs .card {
-    border: none;
-    margin-top: 80px;
+    border: none !important;
+    margin-top: 80px !important;
   }
   .responsive-tabs .card .card-header {
-    display: none;
+    display: none !important;
   }
   .responsive-tabs .card .collapse {
-    display: block;
+    display: block !important;
   }
 }
-@media (min-width: 1280px) {}
-@media (min-width: 1441px) {}
+@media (min-width: 1280px) {
+}
+@media (min-width: 1441px) {
+}
 @media (min-width: 1680px) {
   .container-fluid {
-    padding-left: 90px;
-    padding-right: 90px;
+    padding-left: 90px !important;
+    padding-right: 90px !important;
   }
 }
 /*Start media maxwidth 1681*/
 @media (max-width: 1681px) {
   .header .menu > .menu-item {
-    margin: 0 2.8%;
+    margin: 0 2.8% !important;
   }
   .brand img {
-    height: 85px;
+    height: 85px !important;
   }
   .homeOurClientsBox {
-    width: 245px;
+    width: 245px !important;
   }
   .getTouch {
-    padding-left: 110px;
+    padding-left: 110px !important;
   }
   .seoBannerPart {
-    top: -135px;
+    top: -135px !important;
   }
 }
 /*Start media maxwidth 1536*/
 @media (max-width: 1536px) {
   .header .menu > .menu-item {
-    margin: 0 2.3%;
+    margin: 0 2.3% !important;
   }
   .brand img {
-    height: 80px;
+    height: 80px !important;
   }
   .homeOurClientsBox {
-    width: 230px;
+    width: 230px !important;
   }
   .footerContact ul.footerConList li a {
-    font-size: 14px;
+    font-size: 14px !important;
   }
   .footerContact ul.footerConList li a svg {
-    width: 20px;
+    width: 20px !important;
   }
   .homeGrowBusinessText {
-    padding-top: 55%;
+    padding-top: 41% !important;
   }
   .aboutBoxPart {
-    padding-left: 0.8rem;
-    padding-right: 0.8rem;
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
   }
   .forexWebSolutions .aboutBoxPart {
-    padding: 40px 40px 30px;
+    padding: 40px 40px 30px !important;
   }
   .aboutBoxPart .colInner {
-    padding: 40px 30px 30px;
+    padding: 40px 30px 30px !important;
   }
   .getTouch {
-    padding-left: 90px;
+    padding-left: 90px !important;
   }
   .seoBannerPart {
-    top: -143px;
+    top: -143px !important;
   }
   .seoBanner:after {
-    bottom: 16.7%;
+    bottom: 16.7% !important;
   }
   .seoImg img {
-    left: -36%;
+    left: -36% !important;
   }
   .mainBlogSmall .homeBlogBox {
-    width: auto;
+    width: auto !important;
   }
   .owl-one.owl-carousel .owl-item {
-    padding: 20px;
+    padding: 20px !important;
   }
   .SocialMedialeft {
-    width: 320px;
-    bottom: 25%;
+    width: 320px !important;
+    bottom: 25% !important;
   }
   .SocialMediaright {
-    right: 4%;
-    bottom: 22%;
-    width: 380px;
+    right: 4% !important;
+    bottom: 22% !important;
+    width: 380px !important;
   }
   .lightBox {
-    width: 100%;
+    width: 100% !important;
   }
 }
 /*Start media maxwidth 1367*/
 @media (max-width: 1367px) {
   .brand img {
-    height: 70px;
+    height: 70px !important;
   }
   .container-fluid {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   .homeOurClientsBox {
-    width: 220px;
-    padding: 25px;
+    width: 220px !important;
+    padding: 25px !important;
   }
   .homeGrowBusinessText p {
-    padding: 0;
+    padding: 0 !important;
   }
   .wordpressSolutions ul li {
-    padding: 18px 0;
+    padding: 18px 0 !important;
   }
   .mainBlogSmall .homeBlogBox img {
-    width: 100%;
+    width: 100% !important;
   }
   .mainBlogSmall .homeBlogBox img.blogArrow {
-    width: auto
+    width: auto;
   }
   .SocialMedialeft {
-    width: 300px;
-    bottom: 28%;
-    left: 3%;
+    width: 300px !important;
+    bottom: 28% !important;
+    left: 3% !important;
   }
   .SocialMediaright {
-    right: 3%;
-    bottom: 24%;
-    width: 360px;
+    right: 3% !important;
+    bottom: 24% !important;
+    width: 360px !important;
   }
 }
 /*Start media maxwidth 1559*/
 @media (max-width: 1359px) {
   .container-fluid {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
   }
   .banner h1 {
-    font-size: 40px;
-    line-height: 58px;
+    font-size: 40px !important;
+    line-height: 58px !important;
   }
-  .homeSolutionBox h4, .footerLink ul li a {
-    font-size: 18px;
+  .homeSolutionBox h4,
+  .footerLink ul li a {
+    font-size: 18px !important;
   }
-  .homeOurClients p, .footerLogo {
-    padding: 0;
+  .homeOurClients p,
+  .footerLogo {
+    padding: 0 !important;
   }
   .homeOurClientsBox p {
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 18px !important;
+    line-height: 28px !important;
   }
   .homeOurClientsBox {
-    width: 205px;
+    width: 205px !important;
   }
   .homeCountBox h2 {
-    margin: 0 0 30px;
-    font-size: 58px;
-    padding: 28px;
+    margin: 0 0 30px !important;
+    font-size: 58px !important;
+    padding: 28px !important;
   }
-  .homeOurClients p, .homeGrowBusinessText p {
-    font-size: 20px;
-    line-height: 34px;
+  .homeOurClients p,
+  .homeGrowBusinessText p {
+    font-size: 20px !important;
+    line-height: 34px !important;
   }
   .homeCountBox h4 {
-    font-size: 38px;
-    line-height: 42px;
+    font-size: 38px !important;
+    line-height: 42px !important;
   }
   .footerContact ul.footerConList li a svg {
-    width: 15px;
-    margin-right: 2px;
+    width: 15px !important;
+    margin-right: 2px !important;
   }
   .footerContact ul.footerConList li a {
-    font-size: 13px;
+    font-size: 13px !important;
   }
-  .footerLink h3, .footerContact h3 {
-    font-size: 24px;
+  .footerLink h3,
+  .footerContact h3 {
+    font-size: 24px !important;
   }
-  .footerLogo p, .footer .copy {
-    font-size: 16px;
-    line-height: 28px;
+  .footerLogo p,
+  .footer .copy {
+    font-size: 16px !important;
+    line-height: 28px !important;
   }
   .btn-danger {
-    padding: 0.5em 3em;
+    padding: 0.5em 3em !important;
   }
   .aboutBoxPart h4 {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: 22px !important;
+    line-height: 32px !important;
   }
   .aboutBoxPart ul li {
-    font-size: 18px;
-    line-height: 34px;
+    font-size: 18px !important;
+    line-height: 34px !important;
   }
   .aboutBoxPart {
-    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.18);
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.18) !important;
   }
   .aboutBoxPart:hover {
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.10);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1) !important;
   }
   .owl-one.owl-carousel .owl-item {
-    padding: 18px;
+    padding: 18px !important;
   }
   .seoImg img {
-    top: 45px;
+    top: 45px !important;
   }
   .seoBannerPart {
-    top: -137px;
+    top: -137px !important;
   }
   .roomSidebar {
-    padding: 30px;
+    padding: 30px !important;
   }
   .progress-text {
-    padding: 30px 15px 0;
+    padding: 30px 15px 0 !important;
   }
   .forexWebSolutions .aboutBoxPart {
-    padding: 40px 30px 30px;
+    padding: 40px 30px 30px !important;
   }
 }
 /*Start media maxwidth 1153*/
 @media (max-width: 1153px) {
   .container {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .brand img {
-    height: 50px;
+    height: 50px !important;
   }
   .header .menu > .menu-item > a {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .header .menu > .menu-item {
-    margin: 0 1.8%;
+    margin: 0 1.8% !important;
   }
   .homeSolutionBoxPart {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
   .homeSolutionBox {
-    padding: 2em 1em;
+    padding: 2em 1em !important;
   }
   .homeSolution {
-    text-align: center;
+    text-align: center !important;
   }
   .homeGrowBusinessText {
-    padding-top: 65%;
+    padding-top: 36% !important;
   }
   .homeOurClientsBox {
-    width: 190px;
+    width: 190px !important;
   }
-  .homeCountBox, .homeBlogBox {
-    width: 100%;
+  .homeCountBox,
+  .homeBlogBox {
+    width: 100% !important;
   }
   .homeCountBox h2 {
-    margin: 0 0 30px;
-    padding: 20px;
-    font-size: 42px;
+    margin: 0 0 30px !important;
+    padding: 20px !important;
+    font-size: 42px !important;
   }
   .homeCountBox h4 {
-    font-size: 24px;
-    padding: 0;
+    font-size: 24px !important;
+    padding: 0 !important;
   }
   .homeBlogBox {
-    padding-left: 20px;
+    padding-left: 20px !important;
   }
   .homeBlogBox:before {
-    width: 4px;
+    width: 4px !important;
   }
   .homeBlogBox h3 {
-    font-size: 22px;
+    font-size: 22px !important;
   }
   .homeBlogBox p {
-    font-size: 16px;
-    line-height: 26px;
+    font-size: 16px !important;
+    line-height: 26px !important;
   }
   .homeBlogBox .blogArrow {
-    width: 36px;
+    width: 36px !important;
   }
   .homeNewsletter p {
-    display: none;
+    display: none !important;
   }
   .homeNewsletter #homeSubscribe {
-    margin-top: 30px;
+    margin-top: 30px !important;
   }
   .banner h1 {
-    font-size: 34px;
-    line-height: 50px;
+    font-size: 34px !important;
+    line-height: 50px !important;
   }
-  .banner p, .Contact p {
-    font-size: 20px;
-    line-height: 34px;
+  .banner p,
+  .Contact p {
+    font-size: 20px !important;
+    line-height: 34px !important;
   }
   .titelOne h2 small {
-    font-size: 19px;
+    font-size: 19px !important;
   }
   .titelOne h2 {
-    font-size: 36px;
-    line-height: 38px;
+    font-size: 36px !important;
+    line-height: 38px !important;
   }
-  .homeOurClients p, .homeGrowBusinessText p {
-    font-size: 18px;
-    line-height: 28px;
+  .homeOurClients p,
+  .homeGrowBusinessText p {
+    font-size: 18px !important;
+    line-height: 28px !important;
   }
   h2 {
-    font-size: 36px;
+    font-size: 36px !important;
   }
   .homeFaq .accordion-button {
-    font-size: 20px;
+    font-size: 20px !important;
   }
   .homeFaq .accordion-button::after {
-    width: 1.5rem;
-    height: 1.5rem;
-    background-size: 1.5rem
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    background-size: 1.5rem;
   }
   .footerLink ul li a {
-    font-size: 17px;
+    font-size: 17px !important;
   }
   .footerLink ul li {
-    margin: 12px 0;
+    margin: 12px 0 !important;
   }
   .WhyChoose h3 {
-    font-size: 20px;
+    font-size: 20px !important;
   }
-  .titelTwo h3, .titelLine h3 {
-    font-size: 32px;
+  .titelTwo h3,
+  .titelLine h3 {
+    font-size: 32px !important;
   }
   .header .menu > .menu-item > .sub-menu > .menu-item > a {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .homeWebSolutionsbox {
-    width: 100%;
+    width: 100% !important;
   }
   .aboutBoxPart {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
   .topIcon {
-    margin: 0px 10px 30px;
+    margin: 0px 10px 30px !important;
   }
-  .brandingBox:before, .brandingBox:after {
-    width: 190px;
-    height: 230px;
+  .brandingBox:before,
+  .brandingBox:after {
+    width: 190px !important;
+    height: 230px !important;
   }
   .getTouch {
-    padding-left: 70px;
+    padding-left: 70px !important;
   }
-  .brandingBox:before, .brandingBox:after {
-    width: 80px;
-    height: 370px;
+  .brandingBox:before,
+  .brandingBox:after {
+    width: 80px !important;
+    height: 370px !important;
   }
   .wordpressDevelopment:before {
-    background: var(--color-orange);
-    top: -20%;
+    background: var(--color-orange) !important;
+    top: -20% !important;
   }
   .wordpressDevelopment:after {
-    background: var(--color-green);
-    bottom: 20%;
+    background: var(--color-green) !important;
+    bottom: 20% !important;
   }
   .wordpressDevelopmentImg:before {
-    height: 3px;
-    width: 20%;
-    left: 0;
-    top: 63%;
+    height: 3px !important;
+    width: 20% !important;
+    left: 0 !important;
+    top: 63% !important;
   }
   .wordpressDevelopmentImgLine {
-    height: 3px;
-    right: 0;
-    width: 11%;
-    top: 25%;
+    height: 3px !important;
+    right: 0 !important;
+    width: 11% !important;
+    top: 25% !important;
   }
   .seoImg img {
-    left: -28%;
+    left: -28% !important;
   }
   .keyFeaturesTab .nav-tabs .nav-item {
-    padding: 0 12px;
+    padding: 0 12px !important;
   }
-  .keyFeaturesTab .nav-tabs .nav-link, .keyFeaturesTab .card-header h5 a {
-    font-size: 20px;
-    line-height: 30px;
+  .keyFeaturesTab .nav-tabs .nav-link,
+  .keyFeaturesTab .card-header h5 a {
+    font-size: 20px !important;
+    line-height: 30px !important;
   }
-  .container, .container-fluid {
-    padding-left: 30px;
-    padding-right: 30px;
+  .container,
+  .container-fluid {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
   .progress-text {
-    padding: 30px 0 0;
+    padding: 30px 0 0 !important;
   }
   .topIcon.coloBlue {
-    margin: 20px 0px 0px;
+    margin: 20px 0px 0px !important;
   }
 }
 /*Start media maxwidth 992*/
 @media (max-width: 992px) {
   /*Start Responsive Menu*/
   .header .overlay.active {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .header .navbar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 75%;
-    height: 100%;
-    z-index: 999;
-    opacity: 0;
-    overflow-y: auto;
-    visibility: hidden;
-    background: var(--color-white);
-    -webkit-box-shadow: var(--shadow-medium);
-    box-shadow: var(--shadow-medium);
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    align-items: flex-start;
+    position: fixed !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 75% !important;
+    height: 100% !important;
+    z-index: 999 !important;
+    opacity: 0 !important;
+    overflow-y: auto !important;
+    visibility: hidden !important;
+    background: var(--color-white) !important;
+    -webkit-box-shadow: var(--shadow-medium) !important;
+    box-shadow: var(--shadow-medium) !important;
+    -webkit-transition: all 0.5s ease !important;
+    transition: all 0.5s ease !important;
+    align-items: flex-start !important;
   }
   .header .navbar.active {
-    left: 0rem;
-    opacity: 1;
-    visibility: visible;
+    left: 0rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .header .menu {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    display: block;
-    justify-content: normal;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: block !important;
+    justify-content: normal !important;
   }
   .header .menu > .menu-item {
-    display: block;
-    margin: 0 1.25rem;
+    display: block !important;
+    margin: 0 1.25rem !important;
   }
   .header .menu > .menu-item:last-child {
-    margin: 0;
-    width: 100%;
+    margin: 0 !important;
+    width: 100% !important;
   }
   .header .menu > .menu-item-child > a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
   }
   .header .menu > .menu-item > a {
-    padding: 0.625rem 0;
-    color: var(--color-black);
-    font-size: 18px;
+    padding: 0.625rem 0 !important;
+    color: var(--color-black) !important;
+    font-size: 18px !important;
   }
   .header .menu > .menu-item > a .expand {
-    display: inline-block;
+    display: inline-block !important;
   }
-  .header .menu > .menu-item > a .expand::before, .header .menu > .menu-item > a .expand::after {
-    background: var(--color-black);
+  .header .menu > .menu-item > a .expand::before,
+  .header .menu > .menu-item > a .expand::after {
+    background: var(--color-black) !important;
   }
   .header .menu > .menu-item-child.active > a .expand:after {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg);
-    transform: translate(-50%, -50%) rotate(0deg);
+    -webkit-transform: translate(-50%, -50%) rotate(0deg) !important;
+    transform: translate(-50%, -50%) rotate(0deg) !important;
   }
   .header .menu > .menu-item > .sub-menu {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    max-height: 0;
-    padding: 0px;
-    border: none;
-    outline: none;
-    opacity: 1;
-    overflow: hidden;
-    visibility: visible;
-    background: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-transform: translateY(0px);
-    transform: translateY(0px);
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-height: 0 !important;
+    padding: 0px !important;
+    border: none !important;
+    outline: none !important;
+    opacity: 1 !important;
+    overflow: hidden !important;
+    visibility: visible !important;
+    background: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-transform: translateY(0px) !important;
+    transform: translateY(0px) !important;
   }
   .header .menu > .menu-item > .sub-menu > .menu-item > a {
-    padding: 0rem 0.625rem;
-    color: var(--color-black);
+    padding: 0rem 0.625rem !important;
+    color: var(--color-black) !important;
   }
   .header .burger {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .header.darkHeader .navbar {
-    background: var(--color-blue);
+    background: var(--color-blue) !important;
   }
-  .header.darkHeader .menu > .menu-item > a .expand::before, .header.darkHeader .menu > .menu-item > a .expand::after {
-    background: var(--color-white);
+  .header.darkHeader .menu > .menu-item > a .expand::before,
+  .header.darkHeader .menu > .menu-item > a .expand::after {
+    background: var(--color-white) !important;
   }
   .header.darkHeader .menu > .menu-item > .sub-menu > .menu-item > a {
-    color: var(--color-white);
+    color: var(--color-white) !important;
   }
   /*End Responsive Menu*/
   .topPart {
-    padding: 8px 15px;
+    padding: 8px 15px !important;
   }
   .homeGrowBusinessText {
-    padding-top: 0;
+    padding-top: 0 !important;
   }
   .homeGrowBusiness {
-    padding: 50px 0;
+    padding: 50px 0 !important;
   }
   .homeGrowBusiness {
-    background: var(--color-blue);
-    background: -moz-linear-gradient(top, var(--color-blue) 28%, var(--color-blue) 28%);
-    background: -webkit-linear-gradient(top, var(--color-blue) 28%, var(--color-blue) 28%);
-    background: linear-gradient(to bottom, var(--color-blue) 28%, var(--color-blue) 28%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='var(--color-blue)', endColorstr='var(--color-blue)', GradientType=0);
+    background: var(--color-blue) !important;
+    background: -moz-linear-gradient(
+      top,
+      var(--color-blue) 28%,
+      var(--color-blue) 28%
+    ) !important;
+    background: -webkit-linear-gradient(
+      top,
+      var(--color-blue) 28%,
+      var(--color-blue) 28%
+    ) !important;
+    background: linear-gradient(
+      to bottom,
+      var(--color-blue) 28%,
+      var(--color-blue) 28%
+    ) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='var(--color-blue)', endColorstr='var(--color-blue)', GradientType=0) !important;
   }
   .homeOurClientsBox {
-    width: 190px;
-    float: left;
-    margin: 15px 20px;
+    width: 190px !important;
+    float: left !important;
+    margin: 15px 20px !important;
   }
   .homeSolution {
-    padding: 150px 0 50px;
+    padding: 150px 0 50px !important;
   }
   .homeSolutionBoxPart {
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
   }
-  .homeWebSolutions, .homeWhyChoose, .homeBlog, .ptb-80 {
-    padding: 50px 0;
+  .homeWebSolutions,
+  .homeWhyChoose,
+  .homeBlog,
+  .ptb-80 {
+    padding: 50px 0 !important;
   }
   .pt-80 {
-    padding-top: 50px
+    padding-top: 50px;
   }
   .pb-80 {
-    padding-bottom: 50px
+    padding-bottom: 50px;
   }
   .mtb-80 {
-    margin: 50px 0;
+    margin: 50px 0 !important;
   }
   .mt-80 {
-    margin-top: 50px
+    margin-top: 50px;
   }
   .mb-80 {
-    margin-bottom: 50px
-  }
-  .homeWebSolutionsbox {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  .homeGrowBusinessText h3 {
-    font-size: 32px;
-  }
-  .WhyChoose {
-    margin-top: 50px;
     margin-bottom: 50px;
   }
+  .homeWebSolutionsbox {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+  }
+  .homeGrowBusinessText h3 {
+    font-size: 32px !important;
+  }
+  .WhyChoose {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+  }
   .homeCountBox {
-    margin: 0;
+    margin: 0 !important;
   }
   .homeCountBox h2 {
-    margin: 0 0 10px;
-    padding: 10px;
-    font-size: 32px;
+    margin: 0 0 10px !important;
+    padding: 10px !important;
+    font-size: 32px !important;
   }
   .homeCountBox h4 {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .homeFaq {
-    padding: 50px 0 0;
+    padding: 50px 0 0 !important;
   }
   ul.Social li a svg {
-    width: 42px;
-    height: 42px;
+    width: 42px !important;
+    height: 42px !important;
   }
   .contactBox {
-    margin: 0 auto;
-    width: 100%;
-    box-shadow: inherit;
-    padding-bottom: 0;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-shadow: inherit !important;
+    padding-bottom: 0 !important;
   }
   .titelLine:after {
-    left: 0;
-    right: 0;
-    width: 70px;
+    left: 0 !important;
+    right: 0 !important;
+    width: 70px !important;
   }
   .addressBox {
-    /*width: 80%;*/
-    margin: 0 auto 50px;
+    /*width: 80% !important;*/
+    margin: 0 auto 50px !important;
     height: auto !important;
   }
   .getTouch {
-    width: 120%;
-    left: -10%;
-    margin: 50px auto 0;
-    padding: 40px 100px;
-    margin-bottom: 0;
+    width: 120% !important;
+    left: -10% !important;
+    margin: 50px auto 0 !important;
+    padding: 40px 100px !important;
+    margin-bottom: 0 !important;
   }
   .wordpressDevelopment:before {
-    top: -50%;
+    top: -50% !important;
   }
   .wordpressDevelopmentImg:before {
-    top: 1%;
+    top: 1% !important;
   }
   .wordpressDevelopmentImgLine {
-    width: 8%;
+    width: 8% !important;
   }
   .wordpressSolutions {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
   }
   .wordpressSolutions ul li {
-    background: #364341;
-    padding: 15px 30px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 99;
+    background: #364341 !important;
+    padding: 15px 30px !important;
+    margin-bottom: 15px !important;
+    position: relative !important;
+    z-index: 99 !important;
   }
   .wordpressSolutions ul li:first-child {
-    padding-top: 15px;
+    padding-top: 15px !important;
   }
   .seoImg img {
-    left: 0;
-    top: -60px;
+    left: 0 !important;
+    top: -60px !important;
   }
   .seoBanner:after {
-    bottom: 7%;
-    height: 200px;
+    bottom: 7% !important;
+    height: 200px !important;
   }
   .seoBannerPart {
-    top: -80px;
+    top: -80px !important;
   }
   .seoBanner:before {
-    width: 130px;
-    height: 54%;
-    left: 38%;
+    width: 130px !important;
+    height: 54% !important;
+    left: 38% !important;
   }
   .responsive-tabs .tab-pane {
     display: block !important;
-    opacity: 1;
-    margin-bottom: 80px;
+    opacity: 1 !important;
+    margin-bottom: 80px !important;
   }
   .responsive-tabs .tab-pane:last-child {
-    margin: 0;
+    margin: 0 !important;
   }
   .keyFeaturesTab .card-body {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
   h3 {
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
   }
   .homeNewsletter {
-    padding: 50px 0%;
+    padding: 50px 0% !important;
   }
   .banner {
-    text-align: center;
+    text-align: center !important;
   }
   .flex-lg-row-reverse ul.checkList li {
-    flex-direction: inherit;
+    flex-direction: inherit !important;
   }
   .flex-lg-row-reverse ul.checkList li svg {
-    margin-left: 0;
-    margin-right: 15px;
+    margin-left: 0 !important;
+    margin-right: 15px !important;
   }
   .SocialMediatop {
-    position: absolute;
-    right: 5%;
-    top: 17%;
-    display: block;
+    position: absolute !important;
+    right: 5% !important;
+    top: 17% !important;
+    display: block !important;
   }
-  .SocialMedialeft, .SocialMediaright {
-    display: none;
+  .SocialMedialeft,
+  .SocialMediaright {
+    display: none !important;
   }
   .progress-text {
-    padding: 0 0 0 25px;
+    padding: 0 0 0 25px !important;
   }
   .footerContact ul.footerSocial li a svg {
-    width: 28px;
-    height: 28px;
+    width: 28px !important;
+    height: 28px !important;
   }
   .mianBlogText {
-    margin-left: 0;
-    margin-bottom: 30px;
+    margin-left: 0 !important;
+    margin-bottom: 30px !important;
   }
   .mainBlogSmall .homeBlogBox {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
   .whyForexWebDesign {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
-  .whyForexWebDesignBox:nth-child(3) .whyForexWebDesignImg:after, .whyForexWebDesignBox:nth-child(4) .whyForexWebDesignImg:after {
-    right: inherit;
-    top: inherit;
-    left: -5%;
-    bottom: -9%
+  .whyForexWebDesignBox:nth-child(3) .whyForexWebDesignImg:after,
+  .whyForexWebDesignBox:nth-child(4) .whyForexWebDesignImg:after {
+    right: inherit !important;
+    top: inherit !important;
+    left: -5% !important;
+    bottom: -9%;
   }
-  .whyForexWebDesignBox, .whyForexWebDesignBox:nth-child(4), .whyForexWebDesignBox:nth-child(6) {
-    margin-top: 40px;
+  .whyForexWebDesignBox,
+  .whyForexWebDesignBox:nth-child(4),
+  .whyForexWebDesignBox:nth-child(6) {
+    margin-top: 40px !important;
   }
   .whyForexWebDesignBox .whyForexWebDesignImg {
-    margin-top: 0px;
+    margin-top: 0px !important;
   }
 }
 /*Start media maxwidth 767*/
 @media (max-width: 767px) {
   .homeBlogBox {
-    width: 380px;
+    width: 380px !important;
   }
   .footerContact ul.footerConList li a {
-    font-size: 17px;
+    font-size: 17px !important;
   }
   .footerContact ul.footerConList li a svg {
-    width: 20px;
+    width: 20px !important;
   }
   .keyFeaturesTab {
-    padding-top: 0px;
+    padding-top: 0px !important;
   }
   .responsive-tabs .tab-pane {
-    margin-bottom: 50px;
+    margin-bottom: 50px !important;
   }
 }
 /*Start media maxwidth 667*/
 @media (max-width: 667px) {
   .homeOurClientsBox {
-    margin: 15px 10px;
+    margin: 15px 10px !important;
   }
   .homeWebSolutionsbox {
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
   }
   .homeSolution {
-    padding: 100px 0 50px;
+    padding: 100px 0 50px !important;
   }
 }
 /*Start media maxwidth 576*/
 @media (max-width: 576px) {
   .homeOurClientsBox {
-    width: 300px;
-    margin: 15px auto;
-    float: none
+    width: 300px !important;
+    margin: 15px auto !important;
+    float: none;
   }
   .homeOurClientsBox > div {
-    width: 100%;
-    text-align: center;
+    width: 100% !important;
+    text-align: center !important;
   }
   .WhyChoose.WhyChooseThree {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
   .footer .copy {
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 14px !important;
+    line-height: 22px !important;
   }
   .homeFaq .accordion-button {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .homeFaq .accordion-button::after {
-    width: 1rem;
-    height: 1rem;
-    background-size: 1rem;
+    width: 1rem !important;
+    height: 1rem !important;
+    background-size: 1rem !important;
   }
   .accordion-header {
-    line-height: 24px;
+    line-height: 24px !important;
   }
-  body, p {
-    font-size: 14px;
-    line-height: 22px;
+  body,
+  p {
+    font-size: 14px !important;
+    line-height: 22px !important;
   }
   h2 {
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 28px !important;
+    line-height: 38px !important;
   }
   .homeNewsletter {
-    padding: 50px 0;
+    padding: 50px 0 !important;
   }
-  .titelTwo h3, .titelLine h3 {
-    font-size: 28px;
-    margin-bottom: 15px;
+  .titelTwo h3,
+  .titelLine h3 {
+    font-size: 28px !important;
+    margin-bottom: 15px !important;
   }
-  .titelTwo h3 small, .titelLine h3 small {
-    font-size: 15px;
+  .titelTwo h3 small,
+  .titelLine h3 small {
+    font-size: 15px !important;
   }
   .titelOne h2 {
-    font-size: 30px;
-    line-height: 34px;
+    font-size: 30px !important;
+    line-height: 34px !important;
   }
   .titelOne h2 small {
-    font-size: 16px;
+    font-size: 16px !important;
   }
-  .brandingBox:before, .brandingBox:after {
-    width: 130px;
-    height: 190px;
+  .brandingBox:before,
+  .brandingBox:after {
+    width: 130px !important;
+    height: 190px !important;
   }
-  .wordpressDevelopment:before, .wordpressDevelopment:after {
-    width: 65px;
-    height: 280px;
+  .wordpressDevelopment:before,
+  .wordpressDevelopment:after {
+    width: 65px !important;
+    height: 280px !important;
   }
   .wordpressSolutions:after {
-    width: 55%;
-    height: 55px;
+    width: 55% !important;
+    height: 55px !important;
   }
   .wordpressSolutions:before {
-    width: 55px;
-    height: 60%;
+    width: 55px !important;
+    height: 60% !important;
   }
   .seoBannerPart {
-    top: -55px;
+    top: -55px !important;
   }
   .WhyChoose {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 100% !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
   }
   .homeCountBox {
-    background: #8DA820;
-    margin: 15px 0;
+    background: #8da820 !important;
+    margin: 15px 0 !important;
   }
   .bg-orange .homeCountBox {
-    background: #BE440A;
+    background: #be440a !important;
   }
   .homeCountBox h2 {
-    padding-bottom: 0;
-    padding-top: 15px;
+    padding-bottom: 0 !important;
+    padding-top: 15px !important;
   }
   .homeCountBox h4 {
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
   }
   .getTouch {
-    padding: 40px 50px;
+    padding: 40px 50px !important;
   }
 }
 /*Start media maxwidth 567*/
 @media (max-width: 567px) {
   .banner h1 {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 30px !important;
+    line-height: 40px !important;
   }
-  .banner p, .Contact p {
-    font-size: 18px;
-    line-height: 28px;
+  .banner p,
+  .Contact p {
+    font-size: 18px !important;
+    line-height: 28px !important;
   }
   .btn-outline-warning {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .titelOne h2 {
-    font-size: 26px;
-    line-height: 30px;
+    font-size: 26px !important;
+    line-height: 30px !important;
   }
   .homeSolutionBox {
-    margin: 12px 0;
+    margin: 12px 0 !important;
   }
-  .titelTwo h3, .titelLine h3 {
-    font-size: 24px;
-    line-height: 32px;
+  .titelTwo h3,
+  .titelLine h3 {
+    font-size: 24px !important;
+    line-height: 32px !important;
   }
   .homeGrowBusinessText h3 {
-    font-size: 28px;
+    font-size: 28px !important;
   }
-  .homeOurClients p, .homeGrowBusinessText p {
-    font-size: 16px;
-    line-height: 28px;
+  .homeOurClients p,
+  .homeGrowBusinessText p {
+    font-size: 16px !important;
+    line-height: 28px !important;
   }
   .WhyChoose h3 {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   h2 {
-    font-size: 26px;
-    line-height: 30px;
+    font-size: 26px !important;
+    line-height: 30px !important;
   }
   .homeNewsletter .input-group > .form-control {
-    flex: initial;
-    width: 100%;
-    margin-bottom: 15px;
+    flex: initial !important;
+    width: 100% !important;
+    margin-bottom: 15px !important;
     height: 52px !important;
   }
   .homeNewsletter .input-group .input-group-btn {
-    margin: 0;
-    width: 100%;
+    margin: 0 !important;
+    width: 100% !important;
   }
   .homeNewsletter .btn {
-    height: 52px;
-    width: 100%;
+    height: 52px !important;
+    width: 100% !important;
   }
   .footerLogo img {
-    height: 42px;
+    height: 42px !important;
   }
-  .footerLogo, .footerLink h3, .footerContact h3, .footerLink {
-    margin-bottom: 30px;
+  .footerLogo,
+  .footerLink h3,
+  .footerContact h3,
+  .footerLink {
+    margin-bottom: 30px !important;
   }
   .footer {
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
   }
   .addressBox {
-    /*width: 88%;*/
-    padding: 30px 20px;
+    /*width: 88% !important;*/
+    padding: 30px 20px !important;
   }
   .wordpressSolutions {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
   .wordpressSolutions ul li {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .seoBanner:before {
-    width: 90px;
+    width: 90px !important;
   }
   .responsive-tabs .tab-pane {
-    margin-bottom: 40px;
+    margin-bottom: 40px !important;
   }
   .whyForexWebDesign {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   .whyForexWebDesignBox .titelLine h3 span {
-    font-size: 38px;
+    font-size: 38px !important;
   }
-  .whyForexWebDesignBox, .whyForexWebDesignBox:nth-child(4), .whyForexWebDesignBox:nth-child(6) {
-    margin-top: 30px;
+  .whyForexWebDesignBox,
+  .whyForexWebDesignBox:nth-child(4),
+  .whyForexWebDesignBox:nth-child(6) {
+    margin-top: 30px !important;
   }
   .container-fluid .container {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
-	.homeWebSolutionsbox {
-	  padding: 20px 15px;
+  .homeWebSolutionsbox {
+    padding: 20px 15px !important;
   }
-	.homeWebSolutionsbox a svg{width: 48px;}
-	.homeSolutionBox h4, .footerLink ul li a {
-    font-size: 15px;
-}
+  .homeWebSolutionsbox a svg {
+    width: 48px !important;
+  }
+  .homeSolutionBox h4,
+  .footerLink ul li a {
+    font-size: 15px !important;
+  }
 }
 /*Start media maxwidth 376*/
 @media (max-width: 376px) {
   h2 {
-    font-size: 22px;
+    font-size: 22px !important;
   }
-  .homeBlogBox, .homeOurClientsBox {
-    width: 260px;
+  .homeBlogBox,
+  .homeOurClientsBox {
+    width: 260px !important;
   }
   .homeSolutionBox {
-    padding: 1em 0em;
-    height: 160px;
+    padding: 1em 0em !important;
+    height: 160px !important;
   }
   .topPart a.getQuote {
-    font-size: 15px;
+    font-size: 15px !important;
   }
   .topPart a.getQuote img {
-    width: 26px;
+    width: 26px !important;
   }
   .topPart ul li a svg {
-    width: 20px;
-    height: 20px;
+    width: 20px !important;
+    height: 20px !important;
   }
   .topPart ul li {
-    margin: 0 2px;
+    margin: 0 2px !important;
   }
   .addressBox {
-    width: 92%;
-    padding: 22px 15px;
+    width: 92% !important;
+    padding: 22px 15px !important;
   }
   .wordpressSolutions {
-    padding-left: 0;
-    padding-right: 0px;
+    padding-left: 0 !important;
+    padding-right: 0px !important;
   }
   .wordpressSolutions ul li {
-    font-size: 16px;
-    padding: 10px 18px;
+    font-size: 16px !important;
+    padding: 10px 18px !important;
   }
   .wordpressSolutions ul li:first-child {
-    padding-top: 10px;
+    padding-top: 10px !important;
   }
   .wordpressDevelopment:before {
-    top: -112%;
+    top: -112% !important;
   }
   .getTouch {
-    width: 140%;
-    left: -20%;
+    width: 140% !important;
+    left: -20% !important;
   }
   .homeWebSolutions .col-6 {
-    width: 100%;
+    width: 100% !important;
   }
   .whyForexWebDesign {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
 }

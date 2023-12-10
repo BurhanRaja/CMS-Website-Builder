@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;700&display=swap");
+
 .check-socials ul {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 0px;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-left: 0px !important;
 }
 
 a {
@@ -10,20 +12,414 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 7px !important;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f1 !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #888 !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #555 !important;
+}
+
+.boot-font {
+  height: 188px !important;
+}
+
+@media (max-width: 480px) {
+  .meet-font {
+    font-size: 10px !important;
+  }
+  .meet-font-para {
+    font-size: 12px !important;
+    margin-bottom: 5px !important;
+  }
+  .boot-font {
+    font-size: 15px !important;
+  }
+  .boot-font {
+    height: 100px !important;
+  }
+  .font-margin {
+    margin-bottom: 0 !important;
+  }
+}
+@media (max-width: 320px) {
+  .meet-font {
+    font-size: 10px !important;
+  }
+  .meet-font-para {
+    font-size: 12px !important;
+  }
+  .boot-font {
+    font-size: 15px !important;
+  }
+  .boot-font {
+    height: 100px !important;
+  }
+  .font-margin {
+    margin-bottom: 0 !important;
+  }
+}
+
+.pum-theme-641 .pum-container,
+.pum-theme-lightbox .pum-container {
+  padding: 0 !important;
+}
+.award-section {
+  padding: 100px 0 !important;
+}
+
+/* Award css */
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+.exo-300 {
+  font-family: "Exo", sans-serif !important;
+  font-weight: 300 !important;
+  color: #000 !important;
+}
+
+.exo-400 {
+  font-family: "Exo", sans-serif !important;
+  font-weight: 400 !important;
+  color: #000 !important;
+}
+
+.exo-700 {
+  font-family: "Exo", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.award-main-section {
+  background: linear-gradient(
+    103.78deg,
+    #d9d9d9 32.37%,
+    rgba(192, 192, 192, 0) 91.54%
+  ) !important;
+  width: 100% !important;
+  padding-top: 200px !important;
+  padding-bottom: 100px !important;
+  position: relative !important;
+}
+.award-flex {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+}
+.award-text {
+  font-size: 100px !important;
+  letter-spacing: 0em !important;
+  text-align: center !important;
+  margin-top: 10px !important;
+  text-transform: uppercase !important;
+  margin: 0 0 !important;
+  color: #000 !important;
+}
+
+.award-para-orange {
+  font-family: Exo !important;
+  font-size: 30px !important;
+  line-height: 40px !important;
+  letter-spacing: 0em !important;
+  text-align: center !important;
+  color: #ea550f !important;
+  margin: 32px 0 !important;
+}
+
+.award-para {
+  font-size: 25px !important;
+  line-height: 33px !important;
+  letter-spacing: 0em !important;
+  text-align: center !important;
+  margin: 30px 0 !important;
+}
+
+.excellent-image {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.excellent-image img {
+  width: 67% !important;
+}
+
+.best-text {
+  font-size: 70px !important;
+  letter-spacing: 0.205em !important;
+  text-align: center !important;
+  margin: 30px 0 !important;
+  text-transform: uppercase !important;
+}
+
+.award-images img {
+  position: absolute !important;
+  width: 80% !important;
+}
+
+.award-position {
+  position: relative !important;
+}
+
+.award-rectangle-96 img {
+  width: 28.050754869358396px !important;
+  height: 25.850696860686305px !important;
+  top: 22px !important;
+  left: 469px !important;
+}
+
+.award-rectangle-95 img {
+  position: absolute !important;
+  width: 21.032642910898392px !important;
+  height: 19.38302471924008px !important;
+  top: 129.51123px !important;
+  left: 685px !important;
+}
+
+.award-rectangle-97 img {
+  position: absolute !important;
+  width: 36.72429323388534px !important;
+  height: 34.2012524295092px !important;
+  top: 405px !important;
+  left: 621.928711px !important;
+}
+@media (max-width: 1000px) {
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+@media (max-width: 850px) {
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .award-main-section {
+    padding-top: 50px !important;
+  }
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+    margin: 15px 0 !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+    margin: 15px 0 !important;
+  }
+  .award-para-orange {
+    margin: 19px 0 !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+@media (max-width: 850px) {
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+    margin: 15px 0 !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+    margin: 15px 0 !important;
+  }
+  .award-para-orange {
+    margin: 19px 0 !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .award-main-section {
+    padding-top: 50px !important;
+  }
+  .award-rectangle-95 img {
+    display: none !important;
+  }
+
+  .award-rectangle-97 img {
+    display: none !important;
+  }
+  .award-rectangle-96 {
+    display: none !important;
+  }
+
+  .award-text {
+    font-size: 50px !important;
+  }
+
+  .best-text {
+    font-size: 35px !important;
+    margin: 15px 0 !important;
+  }
+
+  .excellent-image img {
+    width: 60% !important;
+  }
+
+  .award-para {
+    font-size: 17px !important;
+    margin: 15px 0 !important;
+  }
+  .award-para-orange {
+    margin: 19px 0 !important;
+  }
+
+  .award-images img {
+    position: static !important;
+    width: 100% !important;
+  }
 }

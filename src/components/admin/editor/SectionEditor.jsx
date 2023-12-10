@@ -9,6 +9,7 @@ import {
   MenuItem,
   Button,
   Typography,
+  TextField,
 } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,6 +19,9 @@ import { v4 as uuid } from "uuid";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import CloseIcon from "@mui/icons-material/Close";
 import RowModal from "@/components/modals/RowModal";
+import AddEndpoint from "./ui/AddEndpoint";
+import AppSwitch from "./ui/AppSwitch";
+import Link from "next/link";
 
 const Row = ({ children }) => {
   return (
@@ -36,7 +40,7 @@ const Col = ({ colId, index, rowIndex, content }) => {
   return (
     <>
       <Box
-        padding={"15px"}
+        padding={"20px"}
         backgroundColor={"white"}
         border={"1px solid grey"}
         display={"flex"}
@@ -116,29 +120,36 @@ const Col = ({ colId, index, rowIndex, content }) => {
 // Handle column HTML and show preview
 // storing data in database via API
 
-const SectionEditor = ({ rowData }) => {
-  const [rows, setRows] = useState(
-    rowData
-      ? rowData
-      : [
-          {
-            id: uuid(),
-            columnType: "one",
-            padding: "",
-            margin: "",
-            cols: [
-              {
-                id: uuid(),
-                width: "99%",
-                content: "",
-              },
-            ],
-          },
-        ]
-  );
+const SectionEditor = ({ type, rowData }) => {
+  const [rows, setRows] = useState([
+    {
+      id: uuid(),
+      columnType: "one",
+      padding: "",
+      margin: "",
+      cols: [
+        {
+          id: uuid(),
+          width: "99%",
+          content: "",
+        },
+      ],
+    },
+  ]);
   const [openRowModal, setOpenRowModal] = useState(false);
+  const [rowIndex, setRowIndex] = useState(0);
+  const [endpoint, setEndpoint] = useState("");
+  const [title, setTitle] = useState("");
+  const [shortDesc, setShortDesc] = useState("");
+  const [published, setPublished] = useState(false);
 
   const { submitData, setSubmitData, onOpen } = useContext(ModalContext);
+
+  useEffect(() => {
+    if (rowData?.length > 0) {
+      setRows(rowData);
+    }
+  }, [rowData]);
 
   useEffect(() => {
     if (submitData["colId"]) {
@@ -152,9 +163,6 @@ const SectionEditor = ({ rowData }) => {
       setSubmitData({});
     }
   }, [submitData]);
-
-  //   update col - setRows({...rows, cols: cols.map((el) => el.id == id { content = "Update" } return el )})
-  // Swap col - setRows({...rows, cols: })
 
   const handleColumType = (value, rowIndex) => {
     let arr = value.split("-");
@@ -213,15 +221,13 @@ const SectionEditor = ({ rowData }) => {
   };
 
   const handleMargin = (margin, rowIndex) => {
-    let allRows = rows;
-    allRows[rowIndex].margin = margin;
-    setRows(allRows);
+    rows[rowIndex].margin = margin;
+    setRows([...rows]);
   };
 
   const handlePadding = (padding, rowIndex) => {
-    let allRows = rows;
-    allRows[rowIndex].padding = padding;
-    setRows(allRows);
+    rows[rowIndex].padding = padding;
+    setRows([...rows]);
   };
 
   const addRow = () => {
@@ -248,7 +254,6 @@ const SectionEditor = ({ rowData }) => {
     rows[index] = rows[newIndex];
     rows[newIndex] = temp;
     setRows([...rows]);
-    console.log(rows);
   };
 
   const handleShowPreview = () => {
@@ -266,8 +271,14 @@ const SectionEditor = ({ rowData }) => {
       }
       innerContent += `</div>`;
     }
-    innerContent += ``;
-    onOpen({ content: innerContent }, "previewContent");
+    let data = localStorage.getItem("previewHTML");
+    if (data) {
+      localStorage.clear();
+      localStorage.setItem("previewHTML", innerContent);
+    } else {
+      localStorage.setItem("previewHTML", innerContent);
+    }
+    window.open("/");
   };
 
   const removeRow = () => {
@@ -275,15 +286,140 @@ const SectionEditor = ({ rowData }) => {
     setRows([...rows]);
   };
 
+  const handleSubmit = async () => {
+    let innerContent = ``;
+    for (let i = 0; i < rows.length; i++) {
+      innerContent += `<div class="d-flex justify-content-evenly" style="${
+        rows[i].padding ? "padding: " + rows[i].padding + ";" : ""
+      } ${rows[i].margin ? "margin: " + rows[i].margin + ";" : ""}">`;
+      for (let j = 0; j < rows[i].cols.length; j++) {
+        innerContent += `
+          <div style="width: ${rows[i].cols[j].width}">
+            ${rows[i].cols[j].content}
+          </div>
+        `;
+      }
+      innerContent += `</div>`;
+    }
+    let data = {
+      htmlCode: innerContent,
+      endpoint,
+      rows,
+      name: title,
+      shortDesc,
+      published,
+    };
+
+    let response = await fetch("http://localhost:8000/api/admin/pages/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    response = await response.json();
+    setRows([
+      {
+        id: uuid(),
+        columnType: "one",
+        padding: "",
+        margin: "",
+        cols: [
+          {
+            id: uuid(),
+            width: "99%",
+            content: "",
+          },
+        ],
+      },
+    ]);
+    setEndpoint("");
+    setPublished(false);
+    setTitle("");
+    setShortDesc("");
+  };
+
   return (
     <>
-      <Box padding={"15px"} backgroundColor={"#e7e7e7"} borderRadius={"7px"}>
-        <IconButton onClick={() => addRow()}>
-          <AddBoxIcon sx={{ fontSize: "40px", color: "" }} />
-        </IconButton>
-        <Button variant="contained" onClick={() => handleShowPreview()}>
+      <RowModal
+        open={openRowModal}
+        setOpen={(val) => setOpenRowModal(val)}
+        handleColumType={(val) => handleColumType(val, rowIndex)}
+        handleMargin={(val) => handleMargin(val, rowIndex)}
+        handlePadding={(val) => handlePadding(val, rowIndex)}
+      />
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        marginBottom={"20px"}
+      >
+        <Typography variant="h4">Add Page</Typography>
+        <AppSwitch
+          title={"Publish"}
+          checked={published}
+          setChecked={(val) => setPublished(val)}
+        />
+      </Box>
+      <Box
+        display={"flex"}
+        justifyContent={"end"}
+        alignItems={"center"}
+        marginBottom={"20px"}
+      >
+        <Button
+          onClick={() => handleShowPreview()}
+          variant="contained"
+          sx={{
+            backgroundColor: "#a4c525",
+            ":hover": {
+              backgroundColor: "#8c9726",
+            },
+            marginRight: "10px",
+          }}
+        >
           Preview
         </Button>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#ec530e",
+            ":hover": {
+              backgroundColor: "#ba4a24",
+            },
+          }}
+          onClick={() => {
+            if (type === "add") {
+              handleSubmit();
+            }
+          }}
+        >
+          {type === "add" ? "Add Page" : "Update"}
+        </Button>
+      </Box>
+      <Box marginBottom={"20px"}>
+        <Typography marginBottom={"5px"}>Add Title</Typography>
+        <TextField
+          size="small"
+          sx={{ width: "60%" }}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </Box>
+      <Box marginBottom={"20px"}>
+        <Typography marginBottom={"5px"}>Add Short Description</Typography>
+        <TextField
+          size="small"
+          sx={{ width: "60%" }}
+          multiline
+          rows={2}
+          value={shortDesc}
+          onChange={(e) => setShortDesc(e.target.value)}
+        />
+      </Box>
+      <Box marginBottom={"20px"}>
+        <AddEndpoint endpoint={""} setEndpoint={(val) => setEndpoint(val)} />
+      </Box>
+      <Box padding={"15px"} backgroundColor={"#efefef"} borderRadius={"7px"}>
         {rows?.map((row, index) => {
           return (
             <Fragment key={row.id}>
@@ -296,21 +432,6 @@ const SectionEditor = ({ rowData }) => {
                   marginRight={"10px"}
                 >
                   <Grid item marginRight={"5px"}>
-                    <RowModal
-                      open={openRowModal}
-                      rowIndex={row?.id}
-                      setOpen={(val) => setOpenRowModal(val)}
-                      columnType={row?.columnType}
-                      margin={row?.margin?.replace("px", "").split(" ")}
-                      padding={row?.padding?.replace("px", "").split(" ")}
-                      handleColumType={(val, rowIndex) =>
-                        handleColumType(val, index)
-                      }
-                      handleMargin={(val, rowIndex) => handleMargin(val, index)}
-                      handlePadding={(val, rowIndex) =>
-                        handlePadding(val, index)
-                      }
-                    />
                     <IconButton
                       sx={{
                         ":hover": {
@@ -320,7 +441,21 @@ const SectionEditor = ({ rowData }) => {
                         color: "white",
                         borderRadius: "5px",
                       }}
-                      onClick={() => setOpenRowModal(true)}
+                      onClick={() => {
+                        setRowIndex(index);
+                        onOpen(
+                          {
+                            columnType: row?.columnType,
+                            margin: row?.margin
+                              ?.split(" ")
+                              .map((el) => el?.replace("px", "")),
+                            padding: row?.padding
+                              ?.split(" ")
+                              .map((el) => el?.replace("px", "")),
+                          },
+                          "rowModal"
+                        );
+                      }}
                     >
                       <EditIcon
                         sx={{
@@ -339,12 +474,12 @@ const SectionEditor = ({ rowData }) => {
                         color: "white",
                         borderRadius: "5px",
                       }}
+                      onClick={() => removeRow()}
                     >
                       <CloseIcon
                         sx={{
                           fontSize: "18px",
                         }}
-                        onClick={() => removeRow()}
                       />
                     </IconButton>
                   </Grid>
@@ -366,8 +501,8 @@ const SectionEditor = ({ rowData }) => {
               </Row>
               {rows.length > index + 1 && (
                 <Box
-                  marginTop={"20px"}
-                  marginBottom={"20px"}
+                  marginTop={"30px"}
+                  marginBottom={"0px"}
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
@@ -383,6 +518,18 @@ const SectionEditor = ({ rowData }) => {
             </Fragment>
           );
         })}
+        <Box
+          padding={"10px"}
+          border={"1px dotted black"}
+          borderRadius={"8px"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <IconButton onClick={() => addRow()}>
+            <AddBoxIcon sx={{ fontSize: "40px", color: "" }} />
+          </IconButton>
+        </Box>
       </Box>
     </>
   );

@@ -1,15 +1,22 @@
 "use client";
 
 import { Grid, InputAdornment, InputBase, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Padding = ({ padding, setPadding }) => {
-  const [padTop, setPadTop] = useState(padding?.length ? padding[0] : "0");
-  const [padLeft, setPadLeft] = useState(padding?.length ? padding[1] : "0");
-  const [padBottom, setPadBottom] = useState(
-    padding?.length ? padding[2] : "0"
-  );
-  const [padRight, setPadRight] = useState(padding?.length ? padding[3] : "0");
+  const [padTop, setPadTop] = useState("0");
+  const [padLeft, setPadLeft] = useState("0");
+  const [padBottom, setPadBottom] = useState("0");
+  const [padRight, setPadRight] = useState("0");
+
+  useEffect(() => {
+    if (padding?.length === 4) {
+      setPadTop(padding[0]);
+      setPadLeft(padding[1]);
+      setPadBottom(padding[2]);
+      setPadRight(padding[3]);
+    }
+  }, [padding]);
 
   const handleAllPadding = (top, left, bottom, right) => {
     setPadTop(top);

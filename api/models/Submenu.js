@@ -1,9 +1,10 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Menu = sequelize.define(
-    "Menu",
+  const SubMenu = sequelize.define(
+    "Submenu",
     {
+      menuId: DataTypes.INTEGER,
       name: DataTypes.STRING,
       link: DataTypes.STRING,
       type: DataTypes.INTEGER,
@@ -13,5 +14,5 @@ module.exports = (sequelize) => {
     }
   );
 
-  return Menu;
+  return SubMenu;
 };

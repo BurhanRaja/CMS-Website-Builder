@@ -7,7 +7,6 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
@@ -18,32 +17,28 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
 import Margin from "../admin/editor/ui/Margin";
 import Padding from "../admin/editor/ui/Padding";
+import { ModalContext } from "@/context/context";
 
-const RowModal = ({
-  open,
-  setOpen,
-  rowIndex,
-  marginRow,
-  paddingRow,
-  handleColumType,
-  handleMargin,
-  handlePadding,
-}) => {
-  const [columnType, setColumnType] = useState("one");
+const RowModal = ({ handleColumType, handleMargin, handlePadding }) => {
+  const { data, isOpen, type, onClose } = useContext(ModalContext);
+
+  const [columnType, setColumnType] = useState(data?.columnType);
   const [margin, setMargin] = useState("");
   const [padding, setPadding] = useState("");
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  useEffect(() => {
+    if (data?.columnType) {
+      setColumnType(data?.columnType);
+    }
+  }, [data?.columnType]);
 
-  console.log(rowIndex);
+  const isOpenModal = isOpen && type === "rowModal";
 
   return (
     <>
       <Dialog
-        open={open}
-        onClose={() => handleClose()}
+        open={isOpenModal}
+        onClose={() => onClose({})}
         aria-labelledby="alert-dialog-title-edit"
         aria-describedby="alert-dialog-description-edit"
         fullWidth
@@ -54,7 +49,7 @@ const RowModal = ({
           <IconButton
             color="black"
             sx={{ position: "absolute", top: 0, right: 0 }}
-            onClick={() => handleClose()}
+            onClick={() => onClose({})}
           >
             <CloseIcon />
           </IconButton>
@@ -94,11 +89,14 @@ const RowModal = ({
               </Select>
             </Grid>
             <Grid item xs={4}>
-              <Margin margin={marginRow} setMargin={(val) => setMargin(val)} />
+              <Margin
+                margin={data?.margin}
+                setMargin={(val) => setMargin(val)}
+              />
             </Grid>
             <Grid item xs={4}>
               <Padding
-                padding={paddingRow}
+                padding={data?.padding}
                 setPadding={(val) => setPadding(val)}
               />
             </Grid>
@@ -108,11 +106,10 @@ const RowModal = ({
           <Button
             variant="contained"
             onClick={() => {
-              handleColumType(columnType, rowIndex);
-              handleMargin(margin, rowIndex);
-              handlePadding(padding, rowIndex);
-              setColumnType("");
-              setOpen(false);
+              handleColumType(columnType);
+              handleMargin(margin);
+              handlePadding(padding);
+              onClose({});
             }}
             autoFocus
           >

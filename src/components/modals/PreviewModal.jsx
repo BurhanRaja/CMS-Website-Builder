@@ -1,17 +1,15 @@
 "use client";
 
 import { Box, IconButton } from "@mui/material";
-import { useContext, useEffect, useRef, useState } from "react";
-import Button from "@mui/material/Button";
+import { useContext, useEffect, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
-import PreviewContent from "../admin/PreviewContent";
-import { ModalContext, PreviewContext } from "@/context/context";
+import { ModalContext } from "@/context/context";
 import DialogContentText from "@mui/material/DialogContentText";
 import parse from "html-react-parser";
+import Head from "next/head";
 
 const PreviewModal = () => {
   const { data, type, isOpen, onClose } = useContext(ModalContext);
@@ -32,8 +30,8 @@ const PreviewModal = () => {
       <Dialog
         open={isModalOpen}
         onClose={() => onClose({})}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
         maxWidth={"lg"}
         fullWidth
         fullScreen={"xl"}
@@ -41,14 +39,17 @@ const PreviewModal = () => {
       >
         <Box position={"relative"}>
           <IconButton
-            color='black'
+            color="black"
             sx={{ position: "absolute", top: 0, right: 0 }}
             onClick={() => onClose({})}
           >
             <CloseIcon />
           </IconButton>
         </Box>
-        <DialogTitle sx={{ color: "black" }} id='alert-dialog-title'>
+        <DialogTitle
+          sx={{ color: "black !important", fontSize: "20px !important" }}
+          id="alert-dialog-title"
+        >
           {"Preview Content"}
         </DialogTitle>
         <DialogContent dividers sx={{ paddingTop: "10px" }}>
