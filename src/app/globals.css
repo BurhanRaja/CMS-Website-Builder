@@ -423,3 +423,42 @@ body {
     width: 100% !important;
   }
 }
+
+.our-pr-grey {
+  font-size: 24px !important;
+  line-height: 38px !important;
+  color: var(--color-darkGray) !important;
+}
+
+.our-pr-black {
+  font-size: 24px !important;
+  line-height: 38px !important;
+  color: var(--color-black) !important;
+}
+
+div.Social {
+  margin-top: 50px !important;
+}
+
+div.Social li {
+  display: inline-block !important;
+  margin: 0 10px !important;
+}
+
+div.Social li a {
+}
+
+div.Social li a:hover {
+}
+
+div.Social li a svg {
+  width: 52px !important;
+  height: 52px !important;
+  fill: var(--color-green) !important;
+  webkit-transition: all 0.35s ease !important;
+  transition: all 0.35s ease !important;
+}
+
+div.Social li a:hover svg {
+  fill: var(--color-orange) !important;
+}

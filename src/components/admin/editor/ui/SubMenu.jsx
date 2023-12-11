@@ -5,11 +5,11 @@ import ListItemText from "@mui/material/ListItemText";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useState } from "react";
 
-const SubMenu = ({ name }) => {
+const SubMenu = ({ name, url }) => {
   const [openSubMenu, setSubMenu] = useState(false);
 
   return (
-    <>
+    <Box>
       <ListItemButton
         onClick={() => setSubMenu(!openSubMenu)}
         sx={{
@@ -26,13 +26,13 @@ const SubMenu = ({ name }) => {
         sx={{
           border: "1px solid #cfcfcf",
           padding: "10px",
-          marginLeft: "20px",
+          width: "100%",
         }}
       >
         <InputLabel>Link</InputLabel>
-        <TextField size="small" />
+        <TextField size='small' />
       </Collapse>
-    </>
+    </Box>
   );
 };
 

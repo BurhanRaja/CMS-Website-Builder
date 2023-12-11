@@ -9,20 +9,34 @@ const AddEndpoint = ({ endpoint, setEndpoint }) => {
 
   useEffect(() => {
     if (endpoint) {
-      setOneEndPoint(endpoint[0]);
-      setTwoEndPoint(endpoint[1]);
-      setThreeEndPoint(endpoint[2]);
+      setEndpoint(endpoint);
+      let data = endpoint.split("/");
+      if (data?.length == 1) {
+        setOneEndPoint(data[0]);
+      }
+      if (data?.length == 2) {
+        setOneEndPoint(data[0]);
+        setTwoEndPoint(data[1]);
+      }
+      if (data?.length == 3) {
+        setOneEndPoint(data[0]);
+        setTwoEndPoint(data[1]);
+        setThreeEndPoint(data[2]);
+      }
     }
   }, [endpoint]);
 
   const handleEndpoint = (one, two, three) => {
     if (one) {
-      setOneEndPoint(one);
-    } else if (one && two) {
-      setOneEndPoint(one + "/" + two);
-    } else if (one && two && three) {
+      setEndpoint(one);
+    }
+    if (one && two) {
+      setEndpoint(one + "/" + two);
+    }
+    if (one && two && three) {
       setEndpoint(one + "/" + two + "/" + three);
-    } else {
+    }
+    if (!one && !two && !three) {
       setEndpoint("/");
     }
     setOneEndPoint(one);
@@ -37,41 +51,44 @@ const AddEndpoint = ({ endpoint, setEndpoint }) => {
         display={"flex"}
         justifyContent={"space-between"}
         alignItems={"center"}
-        width={"60%"}
+        width={"65%"}
       >
         <TextField
-          size="medium"
+          size='medium'
           sx={{
             "& input": {
               padding: "20px",
             },
+            width: "25%",
           }}
           value={oneEndPoint}
           onChange={(e) =>
             handleEndpoint(e.target.value, twoEndPoint, threeEndPoint)
           }
         />
-        <Typography variant="h5">/</Typography>
+        <Typography variant='h5'>/</Typography>
         <TextField
           sx={{
             "& input": {
               padding: "20px",
             },
+            width: "25%",
           }}
-          size="medium"
+          size='medium'
           value={twoEndPoint}
           onChange={(e) =>
             handleEndpoint(oneEndPoint, e.target.value, threeEndPoint)
           }
         />
-        <Typography variant="h5">/</Typography>
+        <Typography variant='h5'>/</Typography>
         <TextField
           sx={{
             "& input": {
               padding: "20px",
             },
+            width: "25%",
           }}
-          size="medium"
+          size='medium'
           value={threeEndPoint}
           onChange={(e) =>
             handleEndpoint(oneEndPoint, twoEndPoint, e.target.value)

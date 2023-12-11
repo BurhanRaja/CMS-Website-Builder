@@ -6,13 +6,17 @@ import "../css/bootstrap.min.css";
 import "../css/progress-tracker.css";
 import "../css/responsive.css";
 import "../css/style.css";
-import parse from "html-react-parser";
+import "../app/globals.css";
 
 const Test = () => {
   let data = localStorage.getItem("previewHTML");
 
   if (data) {
-    return <>{parse(data)}</>;
+    return (
+      <>
+        <div dangerouslySetInnerHTML={{ __html: data }}></div>
+      </>
+    );
   }
 };
 

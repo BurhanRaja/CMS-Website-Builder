@@ -34,18 +34,18 @@ const MainHeader = ({ drawerWidth, open, setOpen }) => {
         duration: theme.transitions.duration.enteringScreen,
       }),
     }),
-    backgroundColor: "black"
+    backgroundColor: "black",
   }));
 
   return (
     <div>
-      <AppBar position="fixed" open={open} >
-        <Toolbar variant="dense">
+      <AppBar position='fixed' open={open}>
+        <Toolbar variant='dense'>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={() => setOpen(true)}
-            edge="start"
+            edge='start'
             sx={{
               marginRight: 5,
               ...(open && { display: "none" }),
@@ -53,8 +53,8 @@ const MainHeader = ({ drawerWidth, open, setOpen }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+          <Typography variant='h6' noWrap component='div'>
+            Admin Pannel
           </Typography>
         </Toolbar>
       </AppBar>

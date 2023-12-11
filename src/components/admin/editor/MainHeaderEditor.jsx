@@ -3,6 +3,7 @@
 import {
   Box,
   Button,
+  IconButton,
   Collapse,
   Grid,
   InputLabel,
@@ -14,11 +15,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import MainMenu from "./ui/MainMenu";
+import SubMenu from "./ui/SubMenu";
 
 const MainHeader = ({ allPages, allMenus }) => {
   // {
@@ -41,18 +44,19 @@ const MainHeader = ({ allPages, allMenus }) => {
   const [customLinkMenu, setCustomLinkMenu] = useState(false);
 
   const handleAddMenu = (menu) => {
-    menuData.push(menu);
-    setMenuData(menuData);
+    setMenuData([...menuData, menu]);
   };
 
   const handleRemoveMenu = (id) => {
     setMenuData(menuData?.filter((el) => el?.id !== id));
   };
 
+  const handleAddSubMenu = (subMenu) => {};
+
   return (
     <Box>
-      <Typography variant="h4">Main Menu</Typography>
-      <Grid container columnGap={2} marginTop="50px">
+      <Typography variant='h4'>Main Menu</Typography>
+      <Grid container columnGap={2} marginTop='50px'>
         <Grid item xs={3}>
           <Box
             sx={{
@@ -92,7 +96,7 @@ const MainHeader = ({ allPages, allMenus }) => {
                       <ListItemButton role={undefined} onClick={() => {}} dense>
                         <ListItemIcon>
                           <Checkbox
-                            edge="start"
+                            edge='start'
                             value={el}
                             onChange={(e) =>
                               e.target.checked
@@ -144,7 +148,7 @@ const MainHeader = ({ allPages, allMenus }) => {
                 padding={"7px"}
                 borderTop={"0.5px solid #d2d2d2"}
               >
-                <Button variant="contained" size="small">
+                <Button variant='contained' size='small'>
                   Add to Menu
                 </Button>
               </Box>
@@ -160,15 +164,50 @@ const MainHeader = ({ allPages, allMenus }) => {
             <Typography
               backgroundColor={"#f2f2f2"}
               marginBottom={"10px"}
-              variant="h5"
+              variant='h5'
               padding={"15px"}
             >
               Main Menu
             </Typography>
 
-            <Box sx={{ width: "40%", padding: "15px" }}>
+            <Box sx={{ padding: "15px" }}>
               {menuData?.map((el) => {
-                return <MainMenu />;
+                return (
+                  <Box
+                    key={el?.id}
+                    display={"flex"}
+                    justifyContent={"space-between"}
+                    alignItems={"start"}
+                    marginBottom={"30px"}
+                  >
+                    <MainMenu
+                      name={el?.name}
+                      type={0}
+                      url={"http://localhost:3000/" + el?.endpoint}
+                    />
+                    <IconButton>
+                      <AddBoxIcon sx={{ fontSize: "30px" }} />
+                    </IconButton>
+                    {el?.submenus?.length > 0 ? (
+                      el?.submenus?.map((submenu) => {
+                        return (
+                          <SubMenu
+                            name={submenu?.name}
+                            url={
+                              type === 0
+                                ? "http://localhost:3000/" + submenu?.endpoint
+                                : submenu?.endpoint
+                            }
+                          />
+                        );
+                      })
+                    ) : (
+                      <>
+                        <Box width={"40%"}></Box>
+                      </>
+                    )}
+                  </Box>
+                );
               })}
             </Box>
           </Box>

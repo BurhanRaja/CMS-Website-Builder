@@ -1,24 +1,32 @@
 "use client";
-import { Box, Collapse, Grid, InputLabel, TextField } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Grid,
+  InputLabel,
+  TextField,
+  Divider,
+  Button,
+} from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import SubMenu from "./SubMenu";
 
-const MainMenu = ({ name, endpoint, type }) => {
+const MainMenu = ({ name, url, type }) => {
   const [mainMenu, setMainMenu] = useState(false);
   const [link, setLink] = useState("");
   const [linkText, setLinkText] = useState(name);
 
   useEffect(() => {
-    if (endpoint) {
-      setLink("http://localhost:3000" + endpoint);
+    if (url) {
+      setLink(url);
     }
-  }, [endpoint]);
+  }, [url]);
 
   return (
-    <>
+    <Box width='50%'>
       <ListItemButton
         onClick={() => setMainMenu(!mainMenu)}
         sx={{
@@ -41,21 +49,22 @@ const MainMenu = ({ name, endpoint, type }) => {
           <>
             <InputLabel>Link Text</InputLabel>
             <TextField
-              size="small"
+              size='small'
               value={linkText}
               onChange={(e) => setLinkText(e.target.value)}
             />
           </>
         )}
-        <InputLabel>Link</InputLabel>
-        <TextField
-          size="small"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-        />
-        <SubMenu />
+        <Box paddingBottom={"10px"}>
+          <InputLabel>Link</InputLabel>
+          <TextField value={link} onChange={(e) => setLink(e.target.value)} />
+        </Box>
+        <Divider />
+        <Box paddingTop={"10px"}>
+          <Button variant='filled'>Delete</Button>
+        </Box>
       </Collapse>
-    </>
+    </Box>
   );
 };
 

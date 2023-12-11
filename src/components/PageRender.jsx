@@ -8,19 +8,20 @@ import "../css/responsive.css";
 import "../css/style.css";
 
 // import { Head } from "next/document";
-import parse from "html-react-parser";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const PageRender = ({ data }) => {
+  console.log(data);
   if (data?.success) {
     return (
       <>
-        {/* <Head>
-        <title>{data?.data?.name}</title>
-    </Head> */}
         <Header />
-        {parse(data?.data?.htmlCode)}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data?.data?.htmlCode,
+          }}
+        ></div>
         <Footer />
       </>
     );

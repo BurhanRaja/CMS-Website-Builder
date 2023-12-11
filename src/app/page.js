@@ -1,4 +1,3 @@
-
 import PageRender from "@/components/PageRender";
 
 const page = async () => {

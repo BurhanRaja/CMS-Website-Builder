@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import Link from "next/link";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,66 +41,70 @@ const AppTableRows = ({ el }) => {
   const [checked, setChecked] = useState(el?.published === 1);
   const router = useRouter();
 
-  const handlePublished = async (val, id) => {
-    let response = await fetch(
-      `http://localhost:8000/api/pages/changestatus/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ published: checked ? 1 : 0 }),
-      }
-    );
-    response = await response.json();
-    console.log(response);
-    router.refresh();
-    setChecked(val);
-  };
+  // const handlePublished = async (val, id) => {
+  //   let data = { published: checked ? 0 : 1 };
+  //   let response = await fetch(
+  //     `http://localhost:8000/api/admin/pages/changestatus/${id}`,
+  //     {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     }
+  //   );
+  //   response = await response.json();
+  //   console.log(response);
+  //   router.refresh();
+  //   setChecked(val);
+  // };
 
   return (
     <>
       <StyledTableRow key={el?.uniqueId}>
-        <StyledTableCell component="th" scope="row">
+        <StyledTableCell component='th' scope='row'>
           {el?.uniqueId}
         </StyledTableCell>
         <StyledTableCell>{el?.name}</StyledTableCell>
         <StyledTableCell>{el?.endpoint ? el?.endpoint : "/"}</StyledTableCell>
         <StyledTableCell>
-          {el?.published ? (
+          {el?.published == 1 ? (
             <Chip
-              label="publish"
+              label='publish'
               sx={{
                 backgroundColor: "#5b9a52",
                 border: "1px solid green",
                 color: "white",
               }}
-              size="small"
+              size='small'
             />
           ) : (
             <Chip
-              label="publish"
+              label='draft'
               sx={{
                 backgroundColor: "#bc7272",
                 border: "1px solid red",
                 color: "white",
               }}
-              size="small"
+              size='small'
             />
           )}
         </StyledTableCell>
         <StyledTableCell>{el?.createdAt}</StyledTableCell>
-        <StyledTableCell>
+        {/* <StyledTableCell>
           <AppSwitch
             title={""}
+            defaultChecked={el?.published == 1 ? true : false}
             checked={checked}
             setChecked={(val) => handlePublished(val, el?.id)}
           />
-        </StyledTableCell>
+        </StyledTableCell> */}
         <StyledTableCell>
-          <IconButton>
-            <ModeEditIcon />
-          </IconButton>
+          <Link href={`/admin/app-pages/edit/${el?.id}`}>
+            <IconButton>
+              <ModeEditIcon />
+            </IconButton>
+          </Link>
         </StyledTableCell>
         <StyledTableCell>
           <IconButton>
@@ -115,7 +120,7 @@ const AppTable = ({ data }) => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 700 }} aria-label='customized table'>
           <TableHead>
             <TableRow>
               <StyledTableCell>UniqueId</StyledTableCell>
@@ -123,7 +128,7 @@ const AppTable = ({ data }) => {
               <StyledTableCell>Enpoint</StyledTableCell>
               <StyledTableCell>Status</StyledTableCell>
               <StyledTableCell>Date</StyledTableCell>
-              <StyledTableCell>Change Status</StyledTableCell>
+              {/* <StyledTableCell>Change Status</StyledTableCell> */}
               <StyledTableCell>Edit</StyledTableCell>
               <StyledTableCell>Delete</StyledTableCell>
             </TableRow>

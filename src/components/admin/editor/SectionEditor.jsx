@@ -22,6 +22,7 @@ import RowModal from "@/components/modals/RowModal";
 import AddEndpoint from "./ui/AddEndpoint";
 import AppSwitch from "./ui/AppSwitch";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Row = ({ children }) => {
   return (
@@ -83,7 +84,9 @@ const Col = ({ colId, index, rowIndex, content }) => {
                   width: "150px",
                 }}
               >
-                <Typography variant="body2">Raw HTML</Typography>
+                <Typography variant='body2' color={"white"}>
+                  Raw HTML
+                </Typography>
                 <IconButton
                   sx={{ paddingRight: "0", paddingLeft: "0" }}
                   onClick={() => {
@@ -144,12 +147,16 @@ const SectionEditor = ({ type, rowData }) => {
   const [published, setPublished] = useState(false);
 
   const { submitData, setSubmitData, onOpen } = useContext(ModalContext);
+  const router = useRouter();
 
   useEffect(() => {
-    if (rowData?.length > 0) {
-      setRows(rowData);
+    if (rowData?.data) {
+      setRows(rowData?.data?.rows);
+      setTitle(rowData?.data?.page?.name);
+      setShortDesc(rowData?.data?.page?.shortDesc);
+      setPublished(rowData?.data?.page?.published === 1 ? true : false);
     }
-  }, [rowData]);
+  }, [rowData?.data]);
 
   useEffect(() => {
     if (submitData["colId"]) {
@@ -259,9 +266,26 @@ const SectionEditor = ({ type, rowData }) => {
   const handleShowPreview = () => {
     let innerContent = ``;
     for (let i = 0; i < rows.length; i++) {
-      innerContent += `<div class="d-flex justify-content-evenly" style="${
-        rows[i].padding ? "padding: " + rows[i].padding + ";" : ""
-      } ${rows[i].margin ? "margin: " + rows[i].margin + ";" : ""}">`;
+      let paddingCompo = rows[i].padding?.split(" ");
+      let marginCompo = rows[i].margin?.split(" ");
+      console.log(paddingCompo);
+      let padding =
+        rows[i].padding === ""
+          ? "padding: 0px;"
+          : `padding-top: ${paddingCompo[0]} !important;
+          padding-left: ${paddingCompo[1]} !important;
+          padding-bottom: ${paddingCompo[2]} !important;
+          padding-right: ${paddingCompo[3]} !important;
+          `;
+      let margin =
+        rows[i].margin === ""
+          ? "margin: 0px;"
+          : `margin-top: ${marginCompo[0]} !important;
+          margin-left: ${marginCompo[1]} !important;
+          margin-bottom: ${marginCompo[2]} !important;
+          margin-right: ${marginCompo[3]} !important;`;
+
+      innerContent += `<div class="d-flex justify-content-evenly flex-wrap" style="${padding} ${margin}">`;
       for (let j = 0; j < rows[i].cols.length; j++) {
         innerContent += `
           <div style="width: ${rows[i].cols[j].width}">
@@ -278,20 +302,37 @@ const SectionEditor = ({ type, rowData }) => {
     } else {
       localStorage.setItem("previewHTML", innerContent);
     }
-    window.open("/");
+    window.open("/preview");
   };
 
-  const removeRow = () => {
-    rows.pop();
-    setRows([...rows]);
+  const removeRow = (id) => {
+    setRows(rows?.filter((el) => el?.id !== id));
   };
 
   const handleSubmit = async () => {
     let innerContent = ``;
     for (let i = 0; i < rows.length; i++) {
-      innerContent += `<div class="container d-flex justify-content-evenly" style="${
-        rows[i].padding ? "padding: " + rows[i].padding + ";" : ""
-      } ${rows[i].margin ? "margin: " + rows[i].margin + ";" : ""}">`;
+      let paddingCompo = rows[i].padding?.split(" ");
+      let marginCompo = rows[i].margin?.split(" ");
+      console.log(paddingCompo);
+      let padding =
+        rows[i].padding === ""
+          ? "padding: 0px;"
+          : `padding-top: ${paddingCompo[0]} !important;
+          padding-left: ${paddingCompo[1]} !important;
+          padding-bottom: ${paddingCompo[2]} !important;
+          padding-right: ${paddingCompo[3]} !important;
+          `;
+      let margin =
+        rows[i].margin === ""
+          ? "margin: 0px;"
+          : `margin-top: ${marginCompo[0]} !important;
+          margin-left: ${marginCompo[1]} !important;
+          margin-bottom: ${marginCompo[2]} !important;
+          margin-right: ${marginCompo[3]} !important;`;
+
+      innerContent += `<div class="d-flex justify-content-evenly flex-wrap" style="${padding} ${margin}">`;
+
       for (let j = 0; j < rows[i].cols.length; j++) {
         innerContent += `
           <div style="width: ${rows[i].cols[j].width}">
@@ -301,6 +342,7 @@ const SectionEditor = ({ type, rowData }) => {
       }
       innerContent += `</div>`;
     }
+
     let data = {
       htmlCode: innerContent,
       endpoint,
@@ -310,34 +352,57 @@ const SectionEditor = ({ type, rowData }) => {
       published,
     };
 
-    let response = await fetch("http://localhost:8000/api/admin/pages/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    response = await response.json();
-    console.log(response);
-    setRows([
-      {
-        id: uuid(),
-        columnType: "one",
-        padding: "",
-        margin: "",
-        cols: [
+    if (type === "add") {
+      let response = await fetch(
+        "http://localhost:8000/api/admin/pages/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      response = await response.json();
+      if (response?.success) {
+        setRows([
           {
             id: uuid(),
-            width: "99%",
-            content: "",
+            columnType: "one",
+            padding: "",
+            margin: "",
+            cols: [
+              {
+                id: uuid(),
+                width: "99%",
+                content: "",
+              },
+            ],
           },
-        ],
-      },
-    ]);
-    setEndpoint("");
-    setPublished(false);
-    setTitle("");
-    setShortDesc("");
+        ]);
+        setEndpoint("");
+        setPublished(false);
+        setTitle("");
+        setEndpoint("");
+        setShortDesc("");
+      }
+    }
+    if (type === "update") {
+      let response = await fetch(
+        `http://localhost:8000/api/admin/pages/update/${rowData?.data?.page?.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      response = await response.json();
+      if (response?.success) {
+        router.push("/admin/app-pages/all");
+      }
+    }
   };
 
   return (
@@ -354,7 +419,9 @@ const SectionEditor = ({ type, rowData }) => {
         justifyContent={"space-between"}
         marginBottom={"20px"}
       >
-        <Typography variant="h4">Add Page</Typography>
+        <Typography variant='h4'>
+          {type === "add" ? "Add Page" : "Update Page"}
+        </Typography>
         <AppSwitch
           title={"Publish"}
           checked={published}
@@ -369,7 +436,7 @@ const SectionEditor = ({ type, rowData }) => {
       >
         <Button
           onClick={() => handleShowPreview()}
-          variant="contained"
+          variant='contained'
           sx={{
             backgroundColor: "#a4c525",
             ":hover": {
@@ -381,7 +448,7 @@ const SectionEditor = ({ type, rowData }) => {
           Preview
         </Button>
         <Button
-          variant="contained"
+          variant='contained'
           sx={{
             backgroundColor: "#ec530e",
             ":hover": {
@@ -389,9 +456,7 @@ const SectionEditor = ({ type, rowData }) => {
             },
           }}
           onClick={() => {
-            if (type === "add") {
-              handleSubmit();
-            }
+            handleSubmit();
           }}
         >
           {type === "add" ? "Add Page" : "Update"}
@@ -400,9 +465,9 @@ const SectionEditor = ({ type, rowData }) => {
       <Box marginBottom={"20px"}>
         <Typography marginBottom={"5px"}>Add Title</Typography>
         <TextField
-          size="medium"
+          size='medium'
           sx={{
-            width: "60%",
+            width: "65%",
             "& input": {
               padding: "20px",
             },
@@ -414,9 +479,9 @@ const SectionEditor = ({ type, rowData }) => {
       <Box marginBottom={"20px"}>
         <Typography marginBottom={"5px"}>Add Short Description</Typography>
         <TextField
-          size="medium"
+          size='medium'
           sx={{
-            width: "60%",
+            width: "65%",
             "& textarea": {
               paddingRight: "10px",
               paddingLeft: "10px",
@@ -431,7 +496,10 @@ const SectionEditor = ({ type, rowData }) => {
         />
       </Box>
       <Box marginBottom={"20px"}>
-        <AddEndpoint endpoint={""} setEndpoint={(val) => setEndpoint(val)} />
+        <AddEndpoint
+          endpoint={rowData?.data?.page?.endpoint}
+          setEndpoint={(val) => setEndpoint(val)}
+        />
       </Box>
       <Box padding={"15px"} backgroundColor={"#efefef"} borderRadius={"7px"}>
         {rows?.map((row, index) => {
@@ -488,7 +556,7 @@ const SectionEditor = ({ type, rowData }) => {
                         color: "white",
                         borderRadius: "5px",
                       }}
-                      onClick={() => removeRow()}
+                      onClick={() => removeRow(row?.id)}
                     >
                       <CloseIcon
                         sx={{
@@ -525,7 +593,7 @@ const SectionEditor = ({ type, rowData }) => {
                     sx={{ backgroundColor: "#bebebe" }}
                     onClick={() => handleRowSwap(index, index + 1)}
                   >
-                    <SwapVertIcon htmlColor="black" />
+                    <SwapVertIcon htmlColor='black' />
                   </IconButton>
                 </Box>
               )}

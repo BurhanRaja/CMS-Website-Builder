@@ -1613,9 +1613,11 @@ hr {
   box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.18) !important;
   height: 100% !important;
 }
+
 .aboutBoxPart:hover {
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1) !important;
 }
+
 .aboutBoxPart:before {
   position: absolute !important;
   content: "" !important;
@@ -1627,20 +1629,24 @@ hr {
   border-bottom: 0 !important;
   border-right: 0 !important;
 }
+
 .aboutBoxPart:hover:before {
   border: 6px solid var(--color-orange) !important;
   border-bottom: 0 !important;
   border-right: 0 !important;
 }
+
 .aboutBoxPart a {
   display: block !important;
   position: relative !important;
   z-index: 999 !important;
   color: var(--color-green) !important;
 }
+
 .aboutBoxPart a:hover {
   color: var(--color-orange) !important;
 }
+
 .aboutBoxPart .aboutBoxPartlink {
   color: var(--color-blue) !important;
   font-size: 20px !important;
@@ -1651,13 +1657,16 @@ hr {
   webkit-transition: all 0.35s ease !important;
   transition: all 0.35s ease !important;
 }
+
 .aboutBoxPart:hover .aboutBoxPartlink {
   color: var(--color-green) !important;
 }
+
 .aboutBoxPart h4 {
   font-size: 25px !important;
   line-height: 35px !important;
 }
+
 .aboutBoxPart ul li {
   font-family: "Exo", sans-serif !important;
   font-style: normal !important;
@@ -1666,6 +1675,7 @@ hr {
   line-height: 38px !important;
   color: var(--color-black) !important;
 }
+
 .bgOrange:before {
   border: 6px solid var(--color-orange) !important;
   border-bottom: 0 !important;

@@ -59,7 +59,7 @@ exports.createPage = async (req, res) => {
 
     const newPage = await Page.create({
       name,
-      shortDesc,
+      description: shortDesc,
       uniqueId,
       endpoint,
       published,
@@ -71,6 +71,8 @@ exports.createPage = async (req, res) => {
         pageId: newPage.id,
         uniqueId: rows[i].id,
         columnType: rows[i].columnType,
+        margin: rows[i].margin,
+        padding: rows[i].padding,
         rowIndex: i,
       });
       for (let j = 0; j < rows[i].cols.length; j++) {
@@ -85,6 +87,7 @@ exports.createPage = async (req, res) => {
       }
     }
 
+    success = true;
     return res.status(200).send({
       status: 200,
       success,
@@ -103,7 +106,7 @@ exports.editPage = async (req, res) => {
   let success = false;
 
   try {
-    const { name, shortDesc, endpoint, htmlCode, rows } = req.body;
+    const { name, shortDesc, endpoint, published, htmlCode, rows } = req.body;
     const { id } = req.params;
 
     const page = await Page.findOne({
@@ -124,8 +127,9 @@ exports.editPage = async (req, res) => {
       {
         name,
         endpoint,
+        published,
         htmlCode,
-        shortDesc,
+        description: shortDesc,
       },
       { where: { id } }
     );
@@ -146,6 +150,8 @@ exports.editPage = async (req, res) => {
         pageId: id,
         uniqueId: rows[i].id,
         columnType: rows[i].columnType,
+        margin: rows[i].margin,
+        padding: rows[i].padding,
         rowIndex: i,
       });
       for (let j = 0; j < rows[i].cols.length; j++) {
@@ -155,11 +161,12 @@ exports.editPage = async (req, res) => {
           uniqueId: rows[i].cols[j].id,
           content: rows[i].cols[j].content,
           width: rows[i].cols[j].width,
-          index: j,
+          colIndex: j,
         });
       }
     }
 
+    success = true;
     return res.status(200).send({
       status: 200,
       success,
@@ -263,8 +270,6 @@ exports.getSinglePageByEndpoint = async (req, res) => {
   try {
     const { endpoint } = req.query;
 
-    console.log("/" + endpoint);
-
     let page = await Page.findOne({
       where: {
         endpoint,
@@ -318,6 +323,7 @@ exports.getPageEditorData = async (req, res) => {
       where: {
         pageId: id,
       },
+      order: [["rowIndex", "ASC"]],
       raw: true,
     });
 
@@ -328,11 +334,23 @@ exports.getPageEditorData = async (req, res) => {
           rowId: rows[i].id,
           pageId: id,
         },
+        order: [["colIndex", "ASC"]],
         raw: true,
       });
+      let allCols = [];
+      for (let j = 0; j < cols.length; j++) {
+        allCols.push({
+          id: cols[j].uniqueId,
+          width: cols[j].width,
+          content: cols[j].content,
+        });
+      }
       data.push({
-        ...rows[i],
-        cols,
+        id: rows[i].uniqueId,
+        margin: rows[i].margin,
+        padding: rows[i].padding,
+        columnType: rows[i].columnType,
+        cols: allCols,
       });
     }
 
@@ -340,7 +358,10 @@ exports.getPageEditorData = async (req, res) => {
     return res.status(200).send({
       status: 200,
       success,
-      data,
+      data: {
+        page,
+        rows: data,
+      },
     });
   } catch (err) {
     return res.status(500).send({

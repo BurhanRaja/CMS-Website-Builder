@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
       uniqueId: DataTypes.STRING,
       name: DataTypes.STRING,
       endpoint: DataTypes.STRING,
-      htmlCode: DataTypes.TEXT,
+      htmlCode: DataTypes.TEXT("long"),
+      description: DataTypes.TEXT,
       published: DataTypes.INTEGER,
     },
     {

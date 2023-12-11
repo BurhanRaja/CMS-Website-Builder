@@ -13,11 +13,7 @@ const editorConfiguration = {
         classes: true,
         styles: true,
       },
-      {
-        name: "ul",
-        classes: true,
-        styles: true,
-      },
+      { name: "ul", attributes: { type: true }, classes: true, styles: true },
     ],
   },
   toolbar: {
