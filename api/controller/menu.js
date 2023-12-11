@@ -44,25 +44,25 @@ exports.addMenu = async (req, res) => {
   let success = false;
 
   try {
-    const { name, link, type, subMenus } = req.body;
+    const { menus } = req.body;
 
     await SubMenus.destroy({});
     await Menus.destroy({});
 
-    let menu = await Menus.create({
-      name,
-      link,
-      type,
-    });
-
-    for (let i = 0; i < subMenus.length; i++) {
-      await SubMenus.create({
-        id: subMenus[i].id,
-        name: subMenus[i].name,
-        link: subMenus[i].link,
-        menuId: menu.id,
-        type: subMenus[i].type,
+    for (let i = 0; i < menus.length; i++) {
+      let menu = await Menus.create({
+        name: menus[i].name,
+        link: menus[i].link,
+        type: menus[i].type,
       });
+      for (let j = 0; j < menus[i].submenus.length; i++) {
+        await SubMenus.create({
+          name: menus[i].submenus[j].name,
+          link: menus[i].submenus[j].link,
+          menuId: menu.id,
+          type: menus[i].submenus[j].type,
+        });
+      }
     }
 
     success = true;
