@@ -40,7 +40,12 @@ const AddEndpoint = ({ endpoint, setEndpoint }) => {
         width={"60%"}
       >
         <TextField
-          size="small"
+          size="medium"
+          sx={{
+            "& input": {
+              padding: "20px",
+            },
+          }}
           value={oneEndPoint}
           onChange={(e) =>
             handleEndpoint(e.target.value, twoEndPoint, threeEndPoint)
@@ -48,7 +53,12 @@ const AddEndpoint = ({ endpoint, setEndpoint }) => {
         />
         <Typography variant="h5">/</Typography>
         <TextField
-          size="small"
+          sx={{
+            "& input": {
+              padding: "20px",
+            },
+          }}
+          size="medium"
           value={twoEndPoint}
           onChange={(e) =>
             handleEndpoint(oneEndPoint, e.target.value, threeEndPoint)
@@ -56,7 +66,12 @@ const AddEndpoint = ({ endpoint, setEndpoint }) => {
         />
         <Typography variant="h5">/</Typography>
         <TextField
-          size="small"
+          sx={{
+            "& input": {
+              padding: "20px",
+            },
+          }}
+          size="medium"
           value={threeEndPoint}
           onChange={(e) =>
             handleEndpoint(oneEndPoint, twoEndPoint, e.target.value)

@@ -209,10 +209,138 @@ exports.deletePage = async (req, res) => {
       },
     });
 
+    success = true;
     return res.status(200).send({
       status: 200,
       success,
       message: "Page successfully deleted.",
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: 500,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.getSinglePage = async (req, res) => {
+  let success = false;
+  try {
+    const { id } = req.params;
+
+    let page = await Page.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!page) {
+      return res.status(404).send({
+        status: 404,
+        success,
+        message: "Page not found.",
+      });
+    }
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      data: page,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: 500,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.getSinglePageByEndpoint = async (req, res) => {
+  let success = false;
+  try {
+    const { endpoint } = req.query;
+
+    console.log("/" + endpoint);
+
+    let page = await Page.findOne({
+      where: {
+        endpoint,
+      },
+    });
+
+    if (!page) {
+      return res.status(404).send({
+        status: 404,
+        success,
+        message: "Page not found.",
+      });
+    }
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      data: page,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: 500,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.getPageEditorData = async (req, res) => {
+  let success = false;
+
+  try {
+    const { id } = req.params;
+
+    let page = await Page.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!page) {
+      return res.status(404).send({
+        status: 404,
+        success,
+        message: "Page not found.",
+      });
+    }
+
+    const rows = await Rows.findAll({
+      where: {
+        pageId: id,
+      },
+      raw: true,
+    });
+
+    let data = [];
+    for (let i = 0; i < rows.length; i++) {
+      let cols = await Columns.findAll({
+        where: {
+          rowId: rows[i].id,
+          pageId: id,
+        },
+        raw: true,
+      });
+      data.push({
+        ...rows[i],
+        cols,
+      });
+    }
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      data,
     });
   } catch (err) {
     return res.status(500).send({

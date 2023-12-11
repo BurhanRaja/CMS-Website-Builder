@@ -289,7 +289,7 @@ const SectionEditor = ({ type, rowData }) => {
   const handleSubmit = async () => {
     let innerContent = ``;
     for (let i = 0; i < rows.length; i++) {
-      innerContent += `<div class="d-flex justify-content-evenly" style="${
+      innerContent += `<div class="container d-flex justify-content-evenly" style="${
         rows[i].padding ? "padding: " + rows[i].padding + ";" : ""
       } ${rows[i].margin ? "margin: " + rows[i].margin + ";" : ""}">`;
       for (let j = 0; j < rows[i].cols.length; j++) {
@@ -318,6 +318,7 @@ const SectionEditor = ({ type, rowData }) => {
       body: JSON.stringify(data),
     });
     response = await response.json();
+    console.log(response);
     setRows([
       {
         id: uuid(),
@@ -399,8 +400,13 @@ const SectionEditor = ({ type, rowData }) => {
       <Box marginBottom={"20px"}>
         <Typography marginBottom={"5px"}>Add Title</Typography>
         <TextField
-          size="small"
-          sx={{ width: "60%" }}
+          size="medium"
+          sx={{
+            width: "60%",
+            "& input": {
+              padding: "20px",
+            },
+          }}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -408,8 +414,16 @@ const SectionEditor = ({ type, rowData }) => {
       <Box marginBottom={"20px"}>
         <Typography marginBottom={"5px"}>Add Short Description</Typography>
         <TextField
-          size="small"
-          sx={{ width: "60%" }}
+          size="medium"
+          sx={{
+            width: "60%",
+            "& textarea": {
+              paddingRight: "10px",
+              paddingLeft: "10px",
+              paddingTop: "5px",
+              paddingBottom: "5px",
+            },
+          }}
           multiline
           rows={2}
           value={shortDesc}

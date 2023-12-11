@@ -143,12 +143,12 @@ function Sidebar({ drawerWidth, open, setOpen }) {
             {
               name: "All Pages",
               icon: "",
-              link: `/admin/pages/all`,
+              link: `/admin/app-pages/all`,
             },
             {
               name: "Add Page",
               icon: "",
-              link: "/admin/pages/add",
+              link: "/admin/app-pages/add",
             },
           ]}
         />
