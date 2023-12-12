@@ -16,7 +16,7 @@ exports.getAllMenusName = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).send({
-      status: 200,
+      status: 500,
       success,
       message: "Internal Server Error.",
     });
@@ -46,6 +46,7 @@ exports.getAllMenus = async (req, res) => {
       where: {
         menuNameId: id,
       },
+      raw: true,
     });
 
     let finalMenu = [];
@@ -56,6 +57,7 @@ exports.getAllMenus = async (req, res) => {
           menuId: allMenus[i].id,
           menuNameId: id,
         },
+        raw: true,
       });
       finalMenu.push({
         ...allMenus[i],
@@ -67,7 +69,32 @@ exports.getAllMenus = async (req, res) => {
     return res.status(200).send({
       status: 200,
       success,
+      menuName: menuName?.name,
       data: finalMenu,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: 500,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.addMenuName = async (req, res) => {
+  let success = false;
+  try {
+    const { name } = req.body;
+
+    await MenuNames.create({
+      name,
+    });
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      message: "Added Menu name",
     });
   } catch (err) {
     return res.status(500).send({
@@ -81,9 +108,94 @@ exports.getAllMenus = async (req, res) => {
 exports.addMenus = async (req, res) => {
   let success = false;
   try {
+    const { name, menus } = req.body;
 
-    
+    let menuName = await MenuNames.create({ name });
 
+    if (!menuName) {
+      return res.status(400).json({
+        status: 400,
+        success,
+        message: "Failed to add menu name",
+      });
+    }
+    for (let i = 0; i < menus.length; i++) {
+      let newmenu = await Menus.create({
+        name: menus[i].name,
+        type: menus[i].type,
+        link: menus[i].link,
+        menuNameId: menuName.id,
+      });
+      for (let j = 0; j < menus[i].subMenus.length; j++) {
+        await SubMenus.create({
+          menuId: newmenu.id,
+          name: menus[i].subMenus[j].name,
+          link: menus[i].subMenus[j].link,
+          type: menus[i].subMenus[j].type,
+          menuNameId: menuName.id,
+        });
+      }
+    }
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      message: "Menu and submenu created successfully",
+    });
+  } catch (err) {
+    return res.status(500).send({
+      err,
+      status: 500,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.editMenus = async (req, res) => {
+  let success = false;
+
+  try {
+    const { id } = req.params;
+    const { name, menus } = req.body;
+
+    await MenuNames.update({ name }, { where: { id } });
+
+    await Menus.destroy({
+      where: {
+        menuNameId: id,
+      },
+    });
+    await SubMenus.destroy({
+      where: {
+        menuNameId: id,
+      },
+    });
+    for (let i = 0; i < menus.length; i++) {
+      let newmenu = await Menus.create({
+        name: menus[i].name,
+        type: menus[i].type,
+        link: menus[i].link,
+        menuNameId: id,
+      });
+      for (let j = 0; j < menus[i].subMenus.length; j++) {
+        await SubMenus.create({
+          menuId: newmenu.id,
+          name: menus[i].subMenus[j].name,
+          link: menus[i].subMenus[j].link,
+          type: menus[i].subMenus[j].type,
+          menuNameId: id,
+        });
+      }
+    }
+
+    success = true;
+    return res.status(200).send({
+      status: 200,
+      success,
+      message: "Menu and submenu updated successfully",
+    });
   } catch (err) {
     return res.status(500).send({
       status: 200,

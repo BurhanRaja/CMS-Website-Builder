@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ data }) => {
+  console.log(data);
   return (
     <>
-      <header className="header">
+      <header className='header'>
         {/* <div className="topPart d-flex justify-content-between align-items-center">
           {" "}
           <a href="#" className="getQuote">
@@ -112,82 +113,59 @@ const Header = () => {
             </li>
           </ul>
         </div> */}
-        <section className="container-fluid">
-          <div className="wrapper">
+        <section className='container-fluid'>
+          <div className='wrapper'>
             {" "}
-            <a href="#" className="brand">
+            <a href='#' className='brand'>
               <img
-                src="https://techysquad.com/wp-content/uploads/2022/10/logotechy-1.png"
-                alt=""
+                src='https://techysquad.com/wp-content/uploads/2022/10/logotechy-1.png'
+                alt=''
               />
             </a>
-            <button type="button" className="burger" id="burger">
+            <button type='button' className='burger' id='burger'>
               {" "}
-              <span className="burger-line"></span>{" "}
-              <span className="burger-line"></span>{" "}
-              <span className="burger-line"></span>{" "}
-              <span className="burger-line"></span>{" "}
+              <span className='burger-line'></span>{" "}
+              <span className='burger-line'></span>{" "}
+              <span className='burger-line'></span>{" "}
+              <span className='burger-line'></span>{" "}
             </button>
-            <span className="overlay" id="overlay"></span>
-            <nav className="navbar" id="navbar">
-              <ul className="menu">
-                <li className="menu-item">
-                  <Link href="/">Home</Link>
-                </li>
-                <li className="menu-item">
-                  <Link href="/about-us">About</Link>
-                </li>
-                <li className="menu-item menu-item-child">
-                  {/* {" "}
-                  <a href="#" data-toggle="sub-menu">
-                    Services <i className="expand"></i>
-                  </a>
-                  <ul className="sub-menu">
-                    <li className="menu-item">
-                      <a href="#">Web Development Agency</a>
+            <span className='overlay' id='overlay'></span>
+            <nav className='navbar' id='navbar'>
+              <ul className='menu'>
+                {data?.map((el) => {
+                  return el?.subMenus?.length > 0 ? (
+                    <li className='menu-item menu-item-child' key={el?.id}>
+                      <Link
+                        href={el?.link?.replace("http://localhost:3000", "")}
+                        data-toggle='sub-menu'
+                      >
+                        {el?.name} <i className='expand'></i>
+                      </Link>
+                      <ul className='sub-menu'>
+                        {el?.subMenus?.map((subMenu) => {
+                          return (
+                            <li className='menu-item' key={subMenu?.id}>
+                              <Link
+                                href={subMenu?.link?.replace(
+                                  "http://localhost:3000",
+                                  ""
+                                )}
+                              >
+                                {subMenu?.name}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </li>
-                    <li className="menu-item">
-                      <a href="#">Branding</a>
+                  ) : (
+                    <li className='menu-item'>
+                      <Link href='/'>{el?.name}</Link>
                     </li>
-                    <li className="menu-item">
-                      <a href="#">Wordpress Development</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="#">SEO Services</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="#">Social Media Management</a>
-                    </li>
-                  </ul> */}
-                </li>
-                {/* <li className="menu-item menu-item-child">
-                  {" "}
-                  <a href="#" data-toggle="sub-menu">
-                    Forex Solutions <i className="expand"></i>
-                  </a>
-                  <ul className="sub-menu">
-                    <li className="menu-item">
-                      <a href="#">Basic</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="#">Standard</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="#">Premium</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="#">Professional</a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="menu-item">
-                  <a href="#">Products</a>
-                </li>
-                <li className="menu-item">
-                  <a href="#">Blog</a>
-                </li> */}
-                <li className="menu-item">
-                  <a href="#">Contact</a>
+                  );
+                })}
+                <li className='menu-item'>
+                  <a href='#'>Contact</a>
                 </li>
               </ul>
             </nav>

@@ -21,9 +21,14 @@ const page = async ({ params }) => {
   );
   let data = await response.json();
 
+  const headerResponse = await fetch(
+    `http://localhost:8000/api/admin/menus/all/7s`
+  );
+  let headerData = await headerResponse.json();
+
   return (
     <>
-      <PageRender data={data} />
+      <PageRender data={data} headerData={headerData} />
     </>
   );
 };

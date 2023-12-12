@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 
-const MainMenu = ({ name, url, type, width }) => {
+const MainMenu = ({ name, url, type, width, removeMenu, sendUpdate }) => {
   const [mainMenu, setMainMenu] = useState(false);
   const [link, setLink] = useState("");
   const [linkText, setLinkText] = useState(name);
@@ -23,6 +23,14 @@ const MainMenu = ({ name, url, type, width }) => {
       setLink(url);
     }
   }, [url]);
+
+  // useEffect(() => {
+
+  // }, []);
+
+  const handleUpdate = () => {
+    sendUpdate(linkText, link);
+  };
 
   return (
     <Box width={!width ? "50%" : width}>
@@ -34,7 +42,9 @@ const MainMenu = ({ name, url, type, width }) => {
           borderTopRightRadius: "5px",
         }}
       >
-        <ListItemText primary={type === 1 ? "Custom Link" : name} />
+        <ListItemText
+          primary={type === 1 ? name + " - " + "Custom Link" : name}
+        />
         {mainMenu ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse
@@ -57,8 +67,14 @@ const MainMenu = ({ name, url, type, width }) => {
         </Box>
         <Divider />
         <Box paddingTop={"10px"}>
-          <Button variant="filled" color="red" sx={{ color: "red" }}>
-            Delete
+          <Button
+            sx={{ color: "red", marginRight: "10px" }}
+            onClick={() => removeMenu()}
+          >
+            Remove
+          </Button>
+          <Button onClick={() => handleUpdate()} sx={{ color: "blue" }}>
+            Update
           </Button>
         </Box>
       </Collapse>

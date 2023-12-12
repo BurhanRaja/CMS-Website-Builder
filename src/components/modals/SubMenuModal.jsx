@@ -9,7 +9,7 @@ import {
   InputLabel,
   TextField,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -29,11 +29,9 @@ import Checkbox from "@mui/material/Checkbox";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import MainMenu from "@/components/admin/editor/ui/MainMenu";
 
-const SubMenuModal = () => {
+const SubMenuModal = ({ handleSubMenu }) => {
   const { data, type, isOpen, onClose } = useContext(ModalContext);
   const isModalOpen = isOpen && type === "subMenu";
-
-  console.log(data);
 
   const [menuData, setMenuData] = useState([]);
   const [pageSubMenu, setPageSubmenu] = useState(false);
@@ -43,30 +41,44 @@ const SubMenuModal = () => {
   const [customLinkText, setCustomLinkText] = useState("");
   const [customLink, setCustomLink] = useState("");
 
+  useEffect(() => {
+    setMenuData(data?.currSubMenuData);
+  }, [data?.currSubMenuData]);
+
   const handleAddMenu = (menu) => {
     setMenuData([...menuData, menu]);
+    setCustomLinkText("");
+    setCustomLink("");
   };
 
   const handleRemoveMenu = (id) => {
     setMenuData(menuData?.filter((el) => el?.id !== id));
   };
 
-  const addSubMenu = () => {};
+  const addSubMenu = () => {
+    handleSubMenu(menuData, data?.menuIndex);
+  };
+
+  const handleUpdateMenuData = (name, link, index) => {
+    menuData[index].name = name;
+    menuData[index].link = link;
+    setMenuData([...menuData]);
+  };
 
   return (
     <>
       <Dialog
         open={isModalOpen}
         onClose={() => onClose({})}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
         maxWidth={"lg"}
         fullScreen={"md"}
         sx={{ padding: "10px" }}
       >
         <Box position={"relative"}>
           <IconButton
-            color="black"
+            color='black'
             sx={{ position: "absolute", top: 0, right: 0 }}
             onClick={() => onClose({})}
           >
@@ -75,13 +87,13 @@ const SubMenuModal = () => {
         </Box>
         <DialogTitle
           sx={{ color: "black !important", fontSize: "20px !important" }}
-          id="alert-dialog-title"
+          id='alert-dialog-title'
         >
-          {"Add Sub Menu"}
+          {"Add Sub Menu"} - {data?.name}
         </DialogTitle>
         <DialogContent dividers sx={{ paddingTop: "10px" }}>
           <DialogContentText>
-            <Grid container columnGap={2} marginTop="50px">
+            <Grid container columnGap={2} marginTop='50px'>
               <Grid item xs={3}>
                 <Box
                   sx={{
@@ -125,12 +137,16 @@ const SubMenuModal = () => {
                             >
                               <ListItemIcon>
                                 <Checkbox
-                                  edge="start"
+                                  edge='start'
                                   value={el}
                                   onChange={(e) =>
                                     e.target.checked
                                       ? handleAddMenu({
-                                          ...el,
+                                          name: el?.name,
+                                          link: el?.endpoint
+                                            ? "http://localhost:3000/" +
+                                              el?.endpoint
+                                            : "http://localhost:3000/",
                                           type: 0,
                                         })
                                       : handleRemoveMenu(el?.id)
@@ -187,8 +203,8 @@ const SubMenuModal = () => {
                       borderTop={"0.5px solid #d2d2d2"}
                     >
                       <Button
-                        variant="contained"
-                        size="small"
+                        variant='contained'
+                        size='small'
                         onClick={() =>
                           handleAddMenu({
                             id: uuid(),
@@ -204,9 +220,9 @@ const SubMenuModal = () => {
                   </Collapse>
                 </Box>
               </Grid>
-              <Grid item>
+              <Grid item xs={4}>
                 <Box sx={{ padding: "15px" }}>
-                  {menuData?.map((el) => {
+                  {menuData?.map((el, index) => {
                     return (
                       <MainMenu
                         name={el?.name}
@@ -219,6 +235,10 @@ const SubMenuModal = () => {
                             : "http://localhost:3000/"
                         }
                         width={"100%"}
+                        removeMenu={() => handleRemoveMenu(el?.id)}
+                        sendUpdate={(name, link) =>
+                          handleUpdateMenuData(name, link, index)
+                        }
                       />
                     );
                   })}
@@ -229,8 +249,9 @@ const SubMenuModal = () => {
         </DialogContent>
         <DialogActions>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={() => {
+              addSubMenu();
               onClose({});
             }}
             autoFocus

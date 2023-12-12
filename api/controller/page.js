@@ -8,7 +8,7 @@ exports.getAllPages = async (req, res) => {
   let success = false;
   try {
     const allPages = await Page.findAll({});
-
+ 
     success = true;
     return res.status(200).send({
       status: 200,

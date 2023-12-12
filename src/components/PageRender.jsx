@@ -11,12 +11,13 @@ import "../css/style.css";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const PageRender = ({ data }) => {
-  console.log(data);
+const PageRender = ({ data, headerData }) => {
+  console.log(headerData);
+
   if (data?.success) {
     return (
       <>
-        <Header />
+        <Header data={headerData?.data} />
         <div
           dangerouslySetInnerHTML={{
             __html: data?.data?.htmlCode,

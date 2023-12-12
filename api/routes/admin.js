@@ -8,7 +8,13 @@ const {
   getPageEditorData,
   getSinglePageByEndpoint,
 } = require("../controller/page");
-// const { getAllMenus, addMenu } = require("../controller/menu");
+const {
+  getAllMenus,
+  getAllMenusName,
+  addMenus,
+  editMenus,
+  addMenuName,
+} = require("../controller/menu");
 const router = Router();
 
 router.get("/pages/all", getAllPages);
@@ -25,8 +31,14 @@ router.get("/pages/:id", getSinglePage);
 
 router.get("/pages/editor/:id", getPageEditorData);
 
-// router.get("/menus/all", getAllMenus);
+router.get("/menunames/all", getAllMenusName);
 
-// router.post("/menus/add", addMenu);
+router.get("/menus/all/:id", getAllMenus);
+
+router.get("/menunames/add", addMenuName);
+
+router.post("/menus/add", addMenus);
+
+router.post("/menus/edit/:id", editMenus);
 
 module.exports = router;
