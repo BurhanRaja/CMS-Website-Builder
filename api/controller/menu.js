@@ -1,79 +1,92 @@
-const { menus, submenus } = require("../db/db");
+const { menus, submenus, menunames } = require("../db/db");
 const Menus = menus;
 const SubMenus = submenus;
+const MenuNames = menunames;
 
-exports.getAllMenus = async (req, res) => {
+exports.getAllMenusName = async (req, res) => {
   let success = false;
   try {
-    let finalMenus = [];
-
-    const allMenus = await Menus.findAll({
-      raw: true,
-    });
-
-    for (let i = 0; i < allMenus.length; i++) {
-      let subMenus = await SubMenus.findAll({
-        where: {
-          menuId: allMenus[i].id,
-        },
-        raw: true,
-      });
-      finalMenus.push({
-        ...allMenus,
-        submenus: [...subMenus],
-      });
-    }
+    let menuNames = await MenuNames.findAll({});
 
     success = true;
     return res.status(200).send({
       status: 200,
       success,
-      data: finalMenus,
+      data: menuNames,
     });
   } catch (err) {
     return res.status(500).send({
-      err,
-      status: 500,
+      status: 200,
       success,
       message: "Internal Server Error.",
     });
   }
 };
 
-exports.addMenu = async (req, res) => {
+exports.getAllMenus = async (req, res) => {
   let success = false;
-
   try {
-    const { menus } = req.body;
+    const { id } = req.params;
 
-    await SubMenus.destroy({});
-    await Menus.destroy({});
+    let menuName = await MenuNames.findOne({
+      where: {
+        id,
+      },
+    });
 
-    for (let i = 0; i < menus.length; i++) {
-      let menu = await Menus.create({
-        name: menus[i].name,
-        link: menus[i].link,
-        type: menus[i].type,
+    if (!menuName) {
+      return res.status(404).send({
+        status: 404,
+        success,
+        message: "Menu name not found",
       });
-      for (let j = 0; j < menus[i].submenus.length; i++) {
-        await SubMenus.create({
-          name: menus[i].submenus[j].name,
-          link: menus[i].submenus[j].link,
-          menuId: menu.id,
-          type: menus[i].submenus[j].type,
-        });
-      }
+    }
+
+    let allMenus = await Menus.findAll({
+      where: {
+        menuNameId: id,
+      },
+    });
+
+    let finalMenu = [];
+
+    for (let i = 0; i < allMenus.length; i++) {
+      let subMenu = await SubMenus.findAll({
+        where: {
+          menuId: allMenus[i].id,
+          menuNameId: id,
+        },
+      });
+      finalMenu.push({
+        ...allMenus[i],
+        subMenus: subMenu,
+      });
     }
 
     success = true;
     return res.status(200).send({
       status: 200,
       success,
-      message: "Menus Added",
+      data: finalMenu,
     });
   } catch (err) {
     return res.status(500).send({
-      status: 500,
+      status: 200,
+      success,
+      message: "Internal Server Error.",
+    });
+  }
+};
+
+exports.addMenus = async (req, res) => {
+  let success = false;
+  try {
+
+    
+
+  } catch (err) {
+    return res.status(500).send({
+      status: 200,
       success,
       message: "Internal Server Error.",
     });

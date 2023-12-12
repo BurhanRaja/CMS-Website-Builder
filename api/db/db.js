@@ -40,5 +40,6 @@ db.rows = require("../models/Row")(sequelize);
 db.columns = require("../models/Column")(sequelize);
 db.menus = require("../models/Menu")(sequelize);
 db.submenus = require("../models/Submenu")(sequelize);
+db.menunames = require("../models/MenuName")(sequelize);
 
 module.exports = db;

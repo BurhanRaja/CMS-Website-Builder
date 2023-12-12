@@ -12,9 +12,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import SubMenu from "./SubMenu";
 
-const MainMenu = ({ name, url, type }) => {
+const MainMenu = ({ name, url, type, width }) => {
   const [mainMenu, setMainMenu] = useState(false);
   const [link, setLink] = useState("");
   const [linkText, setLinkText] = useState(name);
@@ -26,7 +25,7 @@ const MainMenu = ({ name, url, type }) => {
   }, [url]);
 
   return (
-    <Box width='50%'>
+    <Box width={!width ? "50%" : width}>
       <ListItemButton
         onClick={() => setMainMenu(!mainMenu)}
         sx={{
@@ -45,23 +44,22 @@ const MainMenu = ({ name, url, type }) => {
           padding: mainMenu ? "10px" : "0px",
         }}
       >
-        {type === 1 && (
-          <>
-            <InputLabel>Link Text</InputLabel>
-            <TextField
-              size='small'
-              value={linkText}
-              onChange={(e) => setLinkText(e.target.value)}
-            />
-          </>
-        )}
+        <Box paddingBottom={"10px"}>
+          <InputLabel>Link Text</InputLabel>
+          <TextField
+            value={linkText}
+            onChange={(e) => setLinkText(e.target.value)}
+          />
+        </Box>
         <Box paddingBottom={"10px"}>
           <InputLabel>Link</InputLabel>
           <TextField value={link} onChange={(e) => setLink(e.target.value)} />
         </Box>
         <Divider />
         <Box paddingTop={"10px"}>
-          <Button variant='filled'>Delete</Button>
+          <Button variant="filled" color="red" sx={{ color: "red" }}>
+            Delete
+          </Button>
         </Box>
       </Collapse>
     </Box>

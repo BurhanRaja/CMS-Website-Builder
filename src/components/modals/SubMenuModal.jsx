@@ -1,33 +1,72 @@
 "use client";
 
-import { Box, IconButton } from "@mui/material";
-import { useContext } from "react";
+import {
+  Box,
+  Button,
+  IconButton,
+  Collapse,
+  Grid,
+  InputLabel,
+  TextField,
+} from "@mui/material";
+import { useContext, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import CloseIcon from "@mui/icons-material/Close";
 import { ModalContext } from "@/context/context";
 import DialogContentText from "@mui/material/DialogContentText";
+import { v4 as uuid } from "uuid";
+
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Checkbox from "@mui/material/Checkbox";
+
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import MainMenu from "@/components/admin/editor/ui/MainMenu";
 
 const SubMenuModal = () => {
   const { data, type, isOpen, onClose } = useContext(ModalContext);
   const isModalOpen = isOpen && type === "subMenu";
+
+  console.log(data);
+
+  const [menuData, setMenuData] = useState([]);
+  const [pageSubMenu, setPageSubmenu] = useState(false);
+
+  // Custom
+  const [customLinkMenu, setCustomLinkMenu] = useState(false);
+  const [customLinkText, setCustomLinkText] = useState("");
+  const [customLink, setCustomLink] = useState("");
+
+  const handleAddMenu = (menu) => {
+    setMenuData([...menuData, menu]);
+  };
+
+  const handleRemoveMenu = (id) => {
+    setMenuData(menuData?.filter((el) => el?.id !== id));
+  };
+
+  const addSubMenu = () => {};
 
   return (
     <>
       <Dialog
         open={isModalOpen}
         onClose={() => onClose({})}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
         maxWidth={"lg"}
-        fullWidth
-        fullScreen={"xl"}
+        fullScreen={"md"}
         sx={{ padding: "10px" }}
       >
         <Box position={"relative"}>
           <IconButton
-            color='black'
+            color="black"
             sx={{ position: "absolute", top: 0, right: 0 }}
             onClick={() => onClose({})}
           >
@@ -36,15 +75,169 @@ const SubMenuModal = () => {
         </Box>
         <DialogTitle
           sx={{ color: "black !important", fontSize: "20px !important" }}
-          id='alert-dialog-title'
+          id="alert-dialog-title"
         >
-          {"Preview Content"}
+          {"Add Sub Menu"}
         </DialogTitle>
         <DialogContent dividers sx={{ paddingTop: "10px" }}>
           <DialogContentText>
-            {/* {data?.content ? parse(data?.content) : ""} */}
+            <Grid container columnGap={2} marginTop="50px">
+              <Grid item xs={3}>
+                <Box
+                  sx={{
+                    padding: "5px",
+                  }}
+                >
+                  <ListItemButton
+                    onClick={() => setPageSubmenu(!pageSubMenu)}
+                    sx={{
+                      backgroundColor: "#eeeeee",
+                      borderTopLeftRadius: "5px",
+                      borderTopRightRadius: "5px",
+                    }}
+                  >
+                    <ListItemText primary={"Page"} />
+                    {pageSubMenu ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                  <Collapse
+                    in={pageSubMenu}
+                    sx={{
+                      border: "1px solid #cfcfcf",
+                    }}
+                  >
+                    <List
+                      sx={{
+                        width: "100%",
+                        maxHeight: "400px",
+                        overflow: "hidden",
+                        overflowY: "scroll",
+                        bgcolor: "background.paper",
+                      }}
+                    >
+                      {data?.allPages?.data?.map((el) => {
+                        const labelId = `checkbox-list-label-${el?.unique}`;
+                        return (
+                          <ListItem key={el?.unique} disablePadding>
+                            <ListItemButton
+                              role={undefined}
+                              onClick={() => {}}
+                              dense
+                            >
+                              <ListItemIcon>
+                                <Checkbox
+                                  edge="start"
+                                  value={el}
+                                  onChange={(e) =>
+                                    e.target.checked
+                                      ? handleAddMenu({
+                                          ...el,
+                                          type: 0,
+                                        })
+                                      : handleRemoveMenu(el?.id)
+                                  }
+                                  tabIndex={-1}
+                                  disableRipple
+                                  inputProps={{ "aria-labelledby": labelId }}
+                                />
+                              </ListItemIcon>
+                              <ListItemText id={labelId} primary={el?.name} />
+                            </ListItemButton>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </Collapse>
+                  <ListItemButton
+                    onClick={() => setCustomLinkMenu(!customLinkMenu)}
+                    sx={{
+                      backgroundColor: "#eeeeee",
+                      borderTopLeftRadius: "5px",
+                      borderTopRightRadius: "5px",
+                    }}
+                  >
+                    <ListItemText primary={"Custom Link"} />
+                    {customLinkMenu ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                  <Collapse
+                    in={customLinkMenu}
+                    sx={{
+                      border: "1px solid #cfcfcf",
+                      padding: "10px",
+                    }}
+                  >
+                    <Box marginBottom={"10px"}>
+                      <InputLabel>Link Text</InputLabel>
+                      <TextField
+                        value={customLinkText}
+                        onChange={(e) => setCustomLinkText(e.target.value)}
+                      />
+                    </Box>
+                    <Box marginBottom={"10px"}>
+                      <InputLabel>Link</InputLabel>
+                      <TextField
+                        value={customLink}
+                        onChange={(e) => setCustomLink(e.target.value)}
+                      />
+                    </Box>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"end"}
+                      alignItems={"center"}
+                      padding={"7px"}
+                      borderTop={"0.5px solid #d2d2d2"}
+                    >
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() =>
+                          handleAddMenu({
+                            id: uuid(),
+                            name: customLinkText,
+                            type: 1,
+                            link: customLink,
+                          })
+                        }
+                      >
+                        Add to Menu
+                      </Button>
+                    </Box>
+                  </Collapse>
+                </Box>
+              </Grid>
+              <Grid item>
+                <Box sx={{ padding: "15px" }}>
+                  {menuData?.map((el) => {
+                    return (
+                      <MainMenu
+                        name={el?.name}
+                        type={el?.type}
+                        url={
+                          el?.type === 0 && el?.endpoint
+                            ? "http://localhost:3000/" + el?.endpoint
+                            : el?.type === 1 && el?.link
+                            ? el?.link
+                            : "http://localhost:3000/"
+                        }
+                        width={"100%"}
+                      />
+                    );
+                  })}
+                </Box>
+              </Grid>
+            </Grid>
           </DialogContentText>
         </DialogContent>
+        <DialogActions>
+          <Button
+            variant="contained"
+            onClick={() => {
+              onClose({});
+            }}
+            autoFocus
+          >
+            Save Changes
+          </Button>
+        </DialogActions>
       </Dialog>
     </>
   );

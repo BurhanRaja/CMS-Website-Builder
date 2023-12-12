@@ -16,12 +16,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import { v4 as uuid } from "uuid";
 
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import MainMenu from "./ui/MainMenu";
 import SubMenu from "./ui/SubMenu";
+import SubMenuModal from "@/components/modals/SubMenuModal";
+import { ModalContext } from "@/context/context";
 
 const MainHeader = ({ allPages, allMenus }) => {
   // {
@@ -41,7 +44,13 @@ const MainHeader = ({ allPages, allMenus }) => {
 
   const [menuData, setMenuData] = useState([]);
   const [pageSubMenu, setPageSubmenu] = useState(false);
+
+  // Custom
   const [customLinkMenu, setCustomLinkMenu] = useState(false);
+  const [customLinkText, setCustomLinkText] = useState("");
+  const [customLink, setCustomLink] = useState("");
+
+  const { onOpen } = useContext(ModalContext);
 
   const handleAddMenu = (menu) => {
     setMenuData([...menuData, menu]);
@@ -55,8 +64,11 @@ const MainHeader = ({ allPages, allMenus }) => {
 
   return (
     <Box>
-      <Typography variant='h4'>Main Menu</Typography>
-      <Grid container columnGap={2} marginTop='50px'>
+      <SubMenuModal
+        handleSubMenu={(val, menuIndex) => handleAddSubMenu(val, menuIndex)}
+      />
+      <Typography variant="h4">Main Menu</Typography>
+      <Grid container columnGap={2} marginTop="50px">
         <Grid item xs={3}>
           <Box
             sx={{
@@ -96,11 +108,14 @@ const MainHeader = ({ allPages, allMenus }) => {
                       <ListItemButton role={undefined} onClick={() => {}} dense>
                         <ListItemIcon>
                           <Checkbox
-                            edge='start'
+                            edge="start"
                             value={el}
                             onChange={(e) =>
                               e.target.checked
-                                ? handleAddMenu(el)
+                                ? handleAddMenu({
+                                    ...el,
+                                    type: 0,
+                                  })
                                 : handleRemoveMenu(el?.id)
                             }
                             tabIndex={-1}
@@ -135,11 +150,17 @@ const MainHeader = ({ allPages, allMenus }) => {
             >
               <Box marginBottom={"10px"}>
                 <InputLabel>Link Text</InputLabel>
-                <TextField />
+                <TextField
+                  value={customLinkText}
+                  onChange={(e) => setCustomLinkText(e.target.value)}
+                />
               </Box>
               <Box marginBottom={"10px"}>
                 <InputLabel>Link</InputLabel>
-                <TextField />
+                <TextField
+                  value={customLink}
+                  onChange={(e) => setCustomLink(e.target.value)}
+                />
               </Box>
               <Box
                 display={"flex"}
@@ -148,7 +169,18 @@ const MainHeader = ({ allPages, allMenus }) => {
                 padding={"7px"}
                 borderTop={"0.5px solid #d2d2d2"}
               >
-                <Button variant='contained' size='small'>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() =>
+                    handleAddMenu({
+                      id: uuid(),
+                      name: customLinkText,
+                      type: 1,
+                      link: customLink,
+                    })
+                  }
+                >
                   Add to Menu
                 </Button>
               </Box>
@@ -161,17 +193,18 @@ const MainHeader = ({ allPages, allMenus }) => {
             borderRadius={"6px"}
             minHeight={"600px"}
           >
-            <Typography
+            <Box
               backgroundColor={"#f2f2f2"}
               marginBottom={"10px"}
-              variant='h5'
               padding={"15px"}
+              display={"flex"}
+              justifyContent={"space-between"}
             >
-              Main Menu
-            </Typography>
-
+              <Typography variant="h5">Main Menu</Typography>
+              <Button variant="contained">Add Menu</Button>
+            </Box>
             <Box sx={{ padding: "15px" }}>
-              {menuData?.map((el) => {
+              {menuData?.map((el, index) => {
                 return (
                   <Box
                     key={el?.id}
@@ -182,21 +215,40 @@ const MainHeader = ({ allPages, allMenus }) => {
                   >
                     <MainMenu
                       name={el?.name}
-                      type={0}
-                      url={"http://localhost:3000/" + el?.endpoint}
+                      type={el?.type}
+                      url={
+                        el?.type === 0 && el?.endpoint
+                          ? "http://localhost:3000/" + el?.endpoint
+                          : el?.type === 1 && el?.link
+                          ? el?.link
+                          : "http://localhost:3000/"
+                      }
                     />
-                    <IconButton>
+                    <IconButton
+                      onClick={() =>
+                        onOpen(
+                          {
+                            allPages,
+                            menuIndex: index,
+                          },
+                          "subMenu"
+                        )
+                      }
+                    >
                       <AddBoxIcon sx={{ fontSize: "30px" }} />
                     </IconButton>
                     {el?.submenus?.length > 0 ? (
                       el?.submenus?.map((submenu) => {
                         return (
-                          <SubMenu
+                          <MainMenu
                             name={submenu?.name}
+                            type={submenu?.type}
                             url={
-                              type === 0
+                              submenu?.type === 0 && submenu?.endpoint
                                 ? "http://localhost:3000/" + submenu?.endpoint
-                                : submenu?.endpoint
+                                : submenu?.type === 1 && submenu?.link
+                                ? submenu?.link
+                                : "http://localhost:3000/"
                             }
                           />
                         );
